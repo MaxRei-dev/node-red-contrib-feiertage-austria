@@ -1,0 +1,27 @@
+{
+    "author": {
+      "name": "Marius Lang",
+      "email": "nodered.marius@gmail.com"
+    },
+    "bundleDependencies": false,
+    "dependencies": {
+      
+    },
+    "deprecated": false,
+    "description": "Node that outputs german holidays",
+    "keywords": [
+      "node-red"
+    ],
+    "license": "MIT",
+    "name": "node-red-contrib-feiertage",
+    "node-red": {
+      "nodes": {
+        "feiertage": "feiertage.js"
+      }
+    },
+    "repository": {
+      "private": true
+    },
+    "version": "0.0.1"
+  }
+  

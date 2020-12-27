@@ -1,0 +1,37 @@
+<script type="text/x-red" data-template-name="feiertage">
+    <h3>Output byte to %</h3>
+    <div class="form-row">
+        <label for="node-input-groupaddr"><i class="fa fa-tasks"></i>KNX Group address</label>
+        <input type="text" id="node-input-groupaddr" placeholder="Group address">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="feiertage">
+    <p>Ultimative Shutter controller, which is connectable with knx-Endpoints<br>
+    </p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('feiertage',{
+        category: 'de.marius.smarthome',
+        color: "#339900",
+        inputLabels: "manual request",
+        outputLabels: "feiertage",
+        defaults: {
+            name: {value: "Feiertage", required: true},
+            groupaddr: {value: "", required: false},
+            dpt: {value: "5", required: false}
+		},
+        inputs: 1,
+        outputs: 1,
+        icon: "sunbed.svg",
+        label: function() {
+            return this.name||"shuttercontrolin";
+        },
+    });
+</script>
