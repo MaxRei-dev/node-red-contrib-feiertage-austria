@@ -50,26 +50,188 @@ module.exports = function(RED) {
         var secondDayChristmas = currentYear + "-12-26"; // day of Second day of Christmas
         var newYearsEve = currentYear + "-12-31"; // day of New Years Eve
 
-        var holiday = [
-            newYear,
-            holyThreeKings,
-            valentinstag,
-            mariaHimmelfahrt,
-            tagDerDeutschenEinheit,
-            halloween,
-            allerheiligen,
-            stMartin,
-            bussUndBettag,
-            nikolaus,
-            advent1,
-            advent2,
-            advent3,
-            advent4,
-            christmasEve,
-            firstDayChristmas,
-            secondDayChristmas,
-            newYearsEve
-        ]; // array contains all holiday
+        var holiday = []; // array contains all holiday
+
+        // check New Year is activated
+        if (checkNewYear) {
+            holiday.push(newYear); // add New Year to holiday array
+        }
+        else {
+            var index = holiday.indexOf(newYear); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check Holy Three Kings is activated
+        if (checkHolyThreeKings) {
+            holiday.push(holyThreeKings); // add Holy Three Kings to holiday array
+        }
+        else {
+            var index = holiday.indexOf(holyThreeKings); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check Valentinstag is activated
+        if (checkValentinstag) {
+            holiday.push(valentinstag); // add Valentinstag to holiday array
+        }
+        else {
+            var index = holiday.indexOf(valentinstag); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check Maria Himmelfahrt is activated
+        if (checkMariaHimmelfahrt) {
+            holiday.push(mariaHimmelfahrt); // add Maria Himmelfahrt to holiday array
+        }
+        else {
+            var index = holiday.indexOf(mariaHimmelfahrt); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check Tag der Deutschen Einheit is activated
+        if (checkTagDerDeutschenEinheit) {
+            holiday.push(tagDerDeutschenEinheit); // add Tag der Deutschen Einheit to holiday array
+        }
+        else {
+            var index = holiday.indexOf(tagDerDeutschenEinheit); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check Halloween is activated
+        if (checkHalloween) {
+            holiday.push(halloween); // add Halloween to holiday array
+        }
+        else {
+            var index = holiday.indexOf(halloween); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check Allerheiligen is activated
+        if (checkAllerheiligen) {
+            holiday.push(allerheiligen); // add Allerheiligen to holiday array
+        }
+        else {
+            var index = holiday.indexOf(allerheiligen); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check St. Martin is activated
+        if (checkStMartin) {
+            holiday.push(stMartin); // add St. Martin to holiday array
+        }
+        else {
+            var index = holiday.indexOf(stMartin); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check Buß und Bettag is activated
+        if (checkBussUndBettag) {
+            holiday.push(bussUndBettag); // add Buß und Bettag to holiday array
+        }
+        else {
+            var index = holiday.indexOf(bussUndBettag); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check Nikolaus is activated
+        if (checkNikolaus) {
+            holiday.push(nikolaus); // add Nikolaus to holiday array
+        }
+        else {
+            var index = holiday.indexOf(nikolaus); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check 1. Advent is activated
+        if (checkadvent1) {
+            holiday.push(advent1); // add 1. Advent to holiday array
+        }
+        else {
+            var index = holiday.indexOf(advent1); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check 2. Advent is activated
+        if (checkAdvent2) {
+            holiday.push(advent2); // add 2. Advent to holiday array
+        }
+        else {
+            var index = holiday.indexOf(advent2); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check 3. Advent is activated
+        if (checkAdvent3) {
+            holiday.push(advent3); // add 3. Advent to holiday array
+        }
+        else {
+            var index = holiday.indexOf(advent3); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check 4. Advent is activated
+        if (checkAdvent4) {
+            holiday.push(advent4); // add 4. Advent to holiday array
+        }
+        else {
+            var index = holiday.indexOf(advent4); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check Christmas Eve is activated
+        if (checkChristmasEve) {
+            holiday.push(christmasEve); // add Christmas Eve to holiday array
+        }
+        else {
+            var index = holiday.indexOf(christmasEve); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check First day of Christmas is activted
+        if (checkFirstDayChristmas) {
+            holiday.push(firstDayChristmas); // add First day of Christmas to holiday array
+        }
+        else {
+            var index = holiday.indexOf(firstDayChristmas); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check Second day of Christmas is activated
+        if (checkSecondDayChristmas) {
+            holiday.push(secondDayChristmas); // add Second Christmas Day to holiday array
+        }
+        else {
+            var index = holiday.indexOf(secondDayChristmas); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check New Years Eve is activated
+        if (checkNewYearsEve) {
+            holiday.push(newYearsEve) // add New Years Eve to holiday array
+        }
+        else {
+            var index = holiday.indexOf(newYearsEve); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
 
         var todayHoliday = true;
 
