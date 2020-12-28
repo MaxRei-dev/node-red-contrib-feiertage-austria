@@ -1,8 +1,75 @@
 <script type="text/x-red" data-template-name="feiertage">
-    <h3>Output byte to %</h3>
     <div class="form-row">
-        <label for="node-input-groupaddr"><i class="fa fa-tasks"></i>KNX Group address</label>
-        <input type="text" id="node-input-groupaddr" placeholder="Group address">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-neujahr" placeholder="Neujahr"></span>
+        <label style="width: 200px;" for="node-input-neujahr"><i class="fa fa-calendar"></i> Neujahr</label>
+    </div>
+    <div class="form-row">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-heiligeDreiKoenige" placeholder="Heilige Drei Könige"></span>
+        <label style="width: 200px;" for="node-input-heiligeDreiKoenige"><i class="fa fa-calendar"></i> Heilige Drei Könige</label>
+    </div>
+    <div class="form-row">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-valentinstag" placeholder="Valentinstag"></span>
+        <label style="width: 200px;" for="node-input-valentinstag"><i class="fa fa-calendar"></i> Valentinstag</label>
+    </div>
+    <div class="form-row">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-mariaHimmelfahrt" placeholder="Maria Himmelfahrt"></span>
+        <label style="width: 200px;" for="node-input-mariaHimmelfahrt"><i class="fa fa-calendar"></i> Maria Himmelfahrt</label>
+    </div>
+    <div class="form-row">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-tagDerDeutschenEinheit" placeholder="Tag der Deutschen Einheit"></span>
+        <label style="width: 200px;" for="node-input-tagDerDeutschenEinheit"><i class="fa fa-calendar"></i> Tag der Deutschen Einheit</label>
+    </div>
+    <div class="form-row">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-halloween" placeholder="Halloween"></span>
+        <label style="width: 200px;" for="node-input-halloween"><i class="fa fa-calendar"></i> Halloween</label>
+    </div>
+    <div class="form-row">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-allerheiligen" placeholder="Allerheiligen"></span>
+        <label style="width: 200px;" for="node-input-allerheiligen"><i class="fa fa-calendar"></i> Allerheiligen</label>
+    </div>
+    <div class="form-row">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-stMartin" placeholder="St. Martin"></span>
+        <label style="width: 200px;" for="node-input-stMartin"><i class="fa fa-calendar"></i> St. Martin</label>
+    </div>
+    <div class="form-row">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-bussUndBettag" placeholder="Buß und Bettag"></span>
+        <label style="width: 200px;" for="node-input-bussUndBettag"><i class="fa fa-calendar"></i> Buß und Bettag</label>
+    </div>
+    <div class="form-row">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-nikolaus" placeholder="Nikolaus"></span>
+        <label style="width: 200px;" for="node-input-nikolaus"><i class="fa fa-calendar"></i> Nikolaus</label>
+    </div>
+    <div class="form-row">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-advent1" placeholder="1. Advent"></span>
+        <label style="width: 200px;" for="node-input-advent1"><i class="fa fa-calendar"></i> 1. Advent</label>
+    </div>
+    <div class="form-row">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-advent2" placeholder="2. Advent"></span>
+        <label style="width: 200px;" for="node-input-advent2"><i class="fa fa-calendar"></i> 2. Advent</label>
+    </div>
+    <div class="form-row">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-advent3" placeholder="3. Advent"></span>
+        <label style="width: 200px;" for="node-input-advent3"><i class="fa fa-calendar"></i> 3. Advent</label>
+    </div>
+    <div class="form-row">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-advent4" placeholder="4. Advent"></span>
+        <label style="width: 200px;" for="node-input-advent4"><i class="fa fa-calendar"></i> 4. Advent</label>
+    </div>
+    <div class="form-row">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-heiligabend" placeholder="Heiligabend"></span>
+        <label style="width: 200px;" for="node-input-heiligabend"><i class="fa fa-calendar"></i> Heiligabend</label>
+    </div>
+    <div class="form-row">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-weihnachten1" placeholder="1. Weihnachtsfeiertag"></span>
+        <label style="width: 200px;" for="node-input-weihnachten1"><i class="fa fa-calendar"></i> 1. Weihnachtsfeiertag</label>
+    </div>
+    <div class="form-row">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-weihnachten2" placeholder="2. Weihnachtsfeiertag"></span>
+        <label style="width: 200px;" for="node-input-weihnachten2"><i class="fa fa-calendar"></i> 2. Weihnachtsfeiertag</label>
+    </div>
+    <div class="form-row">
+        <span><input style="width: 20px;" type="checkbox" id="node-input-silvester" placeholder="Silvester"></span>
+        <label style="width: 200px;" for="node-input-silvester"><i class="fa fa-calendar"></i> Silvester</label>
     </div>
 
     <div class="form-row">
@@ -12,7 +79,7 @@
 </script>
 
 <script type="text/x-red" data-help-name="feiertage">
-    <p>Ultimative Shutter controller, which is connectable with knx-Endpoints<br>
+    <p>Feiertage<br>
     </p>
 </script>
 
@@ -24,8 +91,24 @@
         outputLabels: "feiertage",
         defaults: {
             name: {value: "Feiertage", required: true},
-            groupaddr: {value: "", required: false},
-            dpt: {value: "5", required: false}
+            neujahr: {value: true},
+            heiligeDreiKoenige: {value: true},
+            valentinstag: {value: true},
+            mariaHimmelfahrt: {value: true},
+            tagDerDeutschenEinheit: {value: true},
+            halloween: {value: true},
+            allerheiligen: {value: true},
+            stMartin: {value: true},
+            bussUndBettag: {value: true},
+            nikolaus: {value: true},
+            advent1: {value: true},
+            advent2: {value: true},
+            advent3: {value: true},
+            advent4: {value: true},
+            heiligabend: {value: true},
+            weihnachten1: {value: true},
+            weihnachten2: {value: true},
+            silvester: {value: true}
 		},
         inputs: 1,
         outputs: 1,

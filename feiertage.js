@@ -4,11 +4,32 @@ module.exports = function(RED) {
         var context = this.context();
         var node = this;
 
+        var checkNewYear = config.neujahr; // checkbox New Year
+        var checkHolyThreeKings = config.heiligDreiKoenige; // checkboy Holy Three Kings
+        var checkValentinstag = config.valentinstag; // checkbox Valentinstag
+        var checkMariaHimmelfahrt = config.mariaHimmelfahrt; // checkbox Maria Himmelfahrt
+        var checkTagDerDeutschenEinheit = config.tagDerDeutschenEinheit; // checkbox Tag der Deutschen Einheit
+        var checkHalloween = config.halloween; // checkbox Halloween
+        var checkAllerheiligen = config.allerheiligen; // checkbox Allerheiligen
+        var checkStMartin = config.stMartin; // checkbox St. Martin
+        var checkBussUndBettag = config.bussUndBettag; // checkbox Buß und Bettag
+        var checkNikolaus = config.nikolaus; // checkbox Nikolaus
+        var checkadvent1 = config.advent1; // checkbox 1. Advent
+        var checkAdvent2 = config.advent2; // checkbox 2. Advent
+        var checkAdvent3 = config.advent3; // checkbox 3. Advent
+        var checkAdvent4 = config.advent4; // checkbox 4. Advent
+        var checkChristmasEve = config.heiligabend; // checkbox Christmas Eve
+        var checkFirstDayChristmas = config.weihnachten1; // checkbox First day of Chrsitmas
+        var checkSecondDayChristmas = config.weihnachten2; // checkbox Second day of Christmas
+        var checkNewYearsEve = config.silvester; // checkbox New Years Evev
+
         var currentDate = new Date(); // generate object of current date
         var currentDay = currentDate.getDate(); // day 1 - 31
         var currentMonth = currentDate.getMonth() + 1; // month 0 - 11 (+1)
         var currentYear = currentDate.getFullYear(); // full year
         var currentWeekday = currentDate.getDay(); // weekday
+        var currentHour = currentDate.getHours(); // hours
+        var currentMinute = currentDate.getMinutes(); // minutes
 
         var newYear = currentYear + "-1-1"; // day of New Year
         var holyThreeKings = currentYear + "-1-6"; // day of Holy Three Kings
@@ -27,7 +48,7 @@ module.exports = function(RED) {
         var christmasEve = currentYear + "-12-24"; // day of Christmas Eve
         var firstDayChristmas = currentYear + "-12-25"; // day of First day of Christmas
         var secondDayChristmas = currentYear + "-12-26"; // day of Second day of Christmas
-        var newYearsEve = currentYear + "-12-31"; // day of New Year
+        var newYearsEve = currentYear + "-12-31"; // day of New Years Eve
 
         var holiday = [
             newYear,
@@ -62,6 +83,7 @@ module.exports = function(RED) {
                 // outputs next holiday date and name
             }
             else if (msg.payload == "advent") {
+                // outputs advent dates
                 advent(24);
                 node.send({payload: advent1});
                 node.send({payload: advent2});
@@ -69,6 +91,15 @@ module.exports = function(RED) {
                 node.send({payload: advent4});
             }
         });
+
+        var dailyInterval = setInterval(function () {
+            // send todayIsHoliday every day at 00:01 o'clock
+            if (currentHour == 0 && currentMinute == 1) {
+                // check 00:01 o'clock
+                isTodayHoliday();
+                node.send({payload: todayHoliday});
+            }
+		}, 60000); // set interval 1min
 
         function isTodayHoliday() {
             // check today is holiday
@@ -109,6 +140,13 @@ module.exports = function(RED) {
                 advent(day - 1);
             }
         }
+
+        this.on('close', function() {
+            // clears dailyInterval if node is closed
+            if (interval) {
+                clearInterval(dailyInterval);
+            }
+        });
     }
     RED.nodes.registerType("feiertage", feiertage);
 };
