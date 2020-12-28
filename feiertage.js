@@ -50,47 +50,63 @@ module.exports = function(RED) {
             newYearsEve
         ]; // array contains all holiday
 
-        var isTodayHoliday;
+        var todayHoliday = true;
 
         this.on('input', function(msg) {
             if (msg.payload == "isTodayHoliday") {
                 // output boolean is today holiday
                 isTodayHoliday();
-                node.send(isTodayHoliday);
+                node.send({payload: todayHoliday});
             }
             else if (msg.payload == "nextHoliday") {
                 // outputs next holiday date and name
             }
-            advent(24);
+            else if (msg.payload == "advent") {
+                advent(24);
+                node.send({payload: advent1});
+                node.send({payload: advent2});
+                node.send({payload: advent3});
+                node.send({payload: advent4});
+            }
         });
+
+        function isTodayHoliday() {
+            // check today is holiday
+            for (let i = 0; i < holiday.length; i++) {
+                // step through holiday array and check today is holiday
+                if (new Date(holiday[i]).toString() == new Date(currentYear + "-" + currentMonth + "-" + currentDay).toString()) {
+                    todayHoliday = true;
+                    break;
+                }
+                else {
+                    todayHoliday = false;
+                }
+            }
+        }
 
         function advent(day) {
             // calculates days of advent
-            var checkDate = new Date(currentYear + "-12-" + day); // generate object of specific day
+            var checkDate = new Date("2021" + "-12-" + day); // generate object of specific day
             var checkMonth = checkDate.getMonth() + 1; // month (should be 12)
             var checkWeekday = checkDate.getDay(); // weekday
 
             // check generated weekday is 0 and generated month is 12
             if (checkWeekday === 0 && checkMonth == 12) {
-                advent4 = currentYear + "-" + day + "-" + day;
-                advent3 = currentYear + "-" + day + "-" + day - 7;
-                advent2 = currentYear + "-" + day + "-" + day - 14;
-                advent1 = currentYear + "-" + day + "-" + day - 21;
+                advent4 = currentYear + "-" + checkMonth + "-" + day;
+                var advent3Day = day - 7; // calculate day of third advent
+                advent3 = currentYear + "-" + checkMonth + "-" + advent3Day;
+                var advent2Day = day - 14; // calculate day of second advent
+                advent2 = currentYear + "-" + checkMonth + "-" + advent2Day;
+                var advent1Day = day - 21; // calculate day of fist advent
+                if (advent1Day < 1) {
+                    // check day of first advent is in november
+                    checkMonth = "11";
+                    advent1Day = 30 + advent1Day;
+                }
+                advent1 = currentYear + "-" + checkMonth + "-" + advent1Day;
             }
             else {
                 advent(day - 1);
-            }
-        }
-
-        function isTodayHoliday() {
-            // check if today is holiday
-            for (let i = 0; i < holiday.length; i++) {
-                if (new Date(holiday[i]) == new Date()) {
-                    isTodayHoliday = true;
-                }
-                else {
-                    isTodayHoliday = false;
-                }
             }
         }
     }
