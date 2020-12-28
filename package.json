@@ -10,7 +10,11 @@
     "deprecated": false,
     "description": "Node that outputs german holidays",
     "keywords": [
-      "node-red"
+      "node-red",
+      "holiday",
+      "holidays",
+      "feiertag",
+      "feiertage"
     ],
     "license": "MIT",
     "name": "node-red-contrib-feiertage",
