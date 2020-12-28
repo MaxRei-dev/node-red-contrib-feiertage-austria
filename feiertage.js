@@ -34,6 +34,8 @@ module.exports = function(RED) {
         var newYear = currentYear + "-1-1"; // day of New Year
         var holyThreeKings = currentYear + "-1-6"; // day of Holy Three Kings
         var valentinstag = currentYear + "-2-14"; // day of Valentinstag
+        var easterSunnday; // day of Easter Sunday
+        var easterMonday; // day of easter Sunday
         var mariaHimmelfahrt = currentYear + "-8-15" // day of Maria Himmelfahrt
         var tagDerDeutschenEinheit = currentYear + "-10-3"; // day of Tag der Deutschen Einheit
         var halloween = currentYear + "-10-31"; // day of Halloween
@@ -252,12 +254,20 @@ module.exports = function(RED) {
                 node.send({payload: advent3});
                 node.send({payload: advent4});
             }
+            else if (msg.payload == "easter") {
+                // outputs easter dates
+                easter();
+                node.send({payload: easterSunnday});
+                node.send({payload: easterMonday});
+            }
         });
 
         var dailyInterval = setInterval(function () {
             // send todayIsHoliday every day at 00:01 o'clock
             if (currentHour == 0 && currentMinute == 1) {
                 // check 00:01 o'clock
+                advent(24);
+                easter();
                 isTodayHoliday();
                 node.send({payload: todayHoliday});
             }
@@ -275,6 +285,22 @@ module.exports = function(RED) {
                     todayHoliday = false;
                 }
             }
+        }
+
+        function easter() {
+            var a = currentYear % 19; // currentYear mod 19
+            var b = (19 * a + 24) % 30;
+            var easterSunndayDay = b + (2 * (currentYear % 4) + 4 * (currentYear % 7) + 6 * b + 5) % 7;
+            
+            if (easterSunndayDay == 35 || (easterSunndayDay == 34 && b == 28 && a > 10)) {
+                easterSunndayDay -= 7;
+            }
+            // generate Date and change Parameters to easter Date
+            var easterDate = new Date(currentYear, 2, 22);
+            easterDate.setTime(easterDate.getTime() + 86400000 * easterSunndayDay);
+
+            easterSunnday = currentYear + "-" + (easterDate.getMonth() + 1) + "-" + easterDate.getDate();
+            easterMonday = currentYear + "-" + (easterDate.getMonth() + 1) + "-" + (easterDate.getDate() + 1);
         }
 
         function advent(day) {
