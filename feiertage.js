@@ -7,6 +7,8 @@ module.exports = function(RED) {
         var checkNewYear = config.neujahr; // checkbox New Year
         var checkHolyThreeKings = config.heiligDreiKoenige; // checkboy Holy Three Kings
         var checkValentinstag = config.valentinstag; // checkbox Valentinstag
+        var checkEasterSunday = config.easterSunday; // checkbox Easter Sunday
+        var checkEasterMonday = config.easterMonday; // checkbox Easter Monday
         var checkMariaHimmelfahrt = config.mariaHimmelfahrt; // checkbox Maria Himmelfahrt
         var checkTagDerDeutschenEinheit = config.tagDerDeutschenEinheit; // checkbox Tag der Deutschen Einheit
         var checkHalloween = config.halloween; // checkbox Halloween
@@ -80,6 +82,26 @@ module.exports = function(RED) {
         }
         else {
             var index = holiday.indexOf(valentinstag); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check Easter Sunday is activated
+        if (checkEasterSunday) {
+            holiday.push(easterSunnday); // add Easter Sunday to holiday array
+        }
+        else {
+            var index = holiday.indexOf(easterSunnday); // get index of item
+            if (index >= 0) {
+                holiday.splice(index); // remove item at index
+            }
+        }
+        // check Easter Monday is activated
+        if (checkEasterMonday) {
+            holiday.push(easterMonday); // add Easter Monday to holiday array
+        }
+        else {
+            var index = holiday.indexOf(easterMonday); // get index of item
             if (index >= 0) {
                 holiday.splice(index); // remove item at index
             }
@@ -290,16 +312,16 @@ module.exports = function(RED) {
         function easter() {
             var a = currentYear % 19; // currentYear mod 19
             var b = (19 * a + 24) % 30;
-            var easterSunndayDay = b + (2 * (currentYear % 4) + 4 * (currentYear % 7) + 6 * b + 5) % 7;
+            var easterSundayDay = b + (2 * (currentYear % 4) + 4 * (currentYear % 7) + 6 * b + 5) % 7;
             
-            if (easterSunndayDay == 35 || (easterSunndayDay == 34 && b == 28 && a > 10)) {
-                easterSunndayDay -= 7;
+            if (easterSundayDay == 35 || (easterSundayDay == 34 && b == 28 && a > 10)) {
+                easterSundayDay -= 7;
             }
             // generate Date and change Parameters to easter Date
             var easterDate = new Date(currentYear, 2, 22);
-            easterDate.setTime(easterDate.getTime() + 86400000 * easterSunndayDay);
+            easterDate.setTime(easterDate.getTime() + 86400000 * easterSundayDay);
 
-            easterSunnday = currentYear + "-" + (easterDate.getMonth() + 1) + "-" + easterDate.getDate();
+            easterSunday = currentYear + "-" + (easterDate.getMonth() + 1) + "-" + easterDate.getDate();
             easterMonday = currentYear + "-" + (easterDate.getMonth() + 1) + "-" + (easterDate.getDate() + 1);
         }
 
