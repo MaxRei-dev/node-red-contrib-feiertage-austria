@@ -7,7 +7,7 @@ module.exports = function(RED) {
         getCurrentDate(); // get current Date on startup
 
         var checkNewYear = config.neujahr; // checkbox New Year
-        var checkHolyThreeKings = config.heiligDreiKoenige; // checkboy Holy Three Kings
+        var checkHolyThreeKings = config.heiligeDreiKoenige; // checkboy Holy Three Kings
         var checkWeiberfastnacht = config.weiberfastnacht; // checkbox Weiberfastnacht
         var checkValentinstag = config.valentinstag; // checkbox Valentinstag
         var checkRosenmontag = config.rosenmontag; // checkbox Rosenmontag
@@ -72,11 +72,11 @@ module.exports = function(RED) {
         var newYear = []; // day of New Year
         newYear[0] = "New Year";
         newYear[1] = "Neu Jahr";
-        newYear[2] = currentYear + "-01-01"; // day of New Year
+        newYear[2] = currentYear + "-01-01";
         var holyThreeKings = []; // day of Holy Three Kings
         holyThreeKings[0] = "Holy Three Kings";
         holyThreeKings[1] = "Heilige drei Könige";
-        holyThreeKings[2] = currentYear + "-01-01";
+        holyThreeKings[2] = currentYear + "-01-06";
         var weiberfastnacht = []; // day of Weiberfastnacht
         weiberfastnacht[0] = "Weiberfastnacht";
         weiberfastnacht[1] = "Weiberfastnacht";
@@ -228,6 +228,7 @@ module.exports = function(RED) {
             }
             else if (msg.payload == "nextHoliday") {
                 // outputs next holiday date and name
+                nextHoliday();
             }
             else if (msg.payload == "advent") {
                 // outputs advent dates
@@ -263,10 +264,12 @@ module.exports = function(RED) {
                 checkbox(); // read checkbox states
                 easter(); // generate easter dates
                 advent(24); // generate advent dates
+                sortHolidayArray(); // sort holiday array
                 isTodayHoliday(); // check isToday Holiday
             }
             // send todayIsHoliday every day at 00:01 o'clock
             else if (currentHour == 0 && currentMinute == 1) {
+                sortHolidayArray(); // sort holiday array
                 isTodayHoliday(); // check isTodayHoliday
                 node.send({payload: todayHoliday}); // output todayHoliday boolean
             }
@@ -285,7 +288,7 @@ module.exports = function(RED) {
         function checkbox() {
             // check New Year is activated
             if (checkNewYear) {
-                holiday.push(newYear[2]); // add New Year to holiday array
+                holiday.push(newYear); // add New Year to holiday array
             }
             else {
                 var index = holiday.indexOf(newYear); // get index of item
@@ -643,7 +646,7 @@ module.exports = function(RED) {
             else {
                 for (let i = 0; i < holiday.length; i++) {
                     // step through holiday array and check today is holiday
-                    temp = holiday[i];
+                    temp = holiday[i]; // access date array in holidayv array
                     if (new Date(temp[2]).toString() == new Date(currentYear + "-" + currentMonth + "-" + currentDay).toString()) {
                         todayHoliday = true;
                         break;
@@ -653,6 +656,30 @@ module.exports = function(RED) {
                     }
                 }
             }
+        }
+
+        function nextHoliday() {
+            sortHolidayArray(); // sort holiday
+            for (let i = 0; i < holiday.length; i++) {
+                var temp = holiday[i] // access date array in holidayv array
+                // check date - currentDate < 0
+                if ((new Date(temp[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                    node.send({payload: holiday[i - 1]}); // send next holiday
+                    break;
+                }
+            }
+        }
+
+        function sortHolidayArray() {
+            holiday.sort(function(a, b) {
+                if (new Date(a[2]) > new Date(b[2])) {
+                    return -1;
+                }
+                if (new Date(a[2]) < new Date(b[2])) {
+                    return 1;
+                }
+                return 0;
+            });
         }
 
         function easter() {
@@ -709,7 +736,7 @@ module.exports = function(RED) {
 
         function advent(day) {
             // calculates days of advent
-            var checkDate = new Date("2021" + "-12-" + day); // generate object of specific day
+            var checkDate = new Date(currentYear + "-12-" + day); // generate object of specific day
             var checkMonth = checkDate.getMonth() + 1; // month (should be 12)
             var checkWeekday = checkDate.getDay(); // weekday
 
