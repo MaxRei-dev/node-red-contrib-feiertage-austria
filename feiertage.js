@@ -661,7 +661,7 @@ module.exports = function(RED) {
         function nextHoliday() {
             sortHolidayArray(); // sort holiday
             for (let i = 0; i < holiday.length; i++) {
-                var temp = holiday[i] // access date array in holidayv array
+                var temp = holiday[i] // access date array in holiday array
                 // check date - currentDate < 0
                 if ((new Date(temp[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
                     node.send({payload: holiday[i - 1]}); // send next holiday
