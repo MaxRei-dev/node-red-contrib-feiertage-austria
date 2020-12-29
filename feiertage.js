@@ -215,6 +215,7 @@ module.exports = function(RED) {
         advent(24); // set advent days on startup
 
         var holiday = []; // array contains all holiday
+        var nextHoliday = []; // array contains next holiday
 
         checkbox(); // read checkbox states on startup
 
@@ -228,7 +229,12 @@ module.exports = function(RED) {
             }
             else if (msg.payload == "nextHoliday") {
                 // outputs next holiday date and name
-                nextHoliday();
+                getNextHoliday();
+                node.send({payload: nextHoliday});
+            }
+            else if (msg.payload == "all") {
+                // outputs holiday array
+                getAll();
             }
             else if (msg.payload == "advent") {
                 // outputs advent dates
@@ -261,16 +267,19 @@ module.exports = function(RED) {
             // delete holiday array at New Year
             if (currentDay == 1 && currentMonth == 1 && currentHour == 0 && currentMinute == 1) {
                 holiday.length = 0; // delete holiday array
-                checkbox(); // read checkbox states
                 easter(); // generate easter dates
                 advent(24); // generate advent dates
+                checkbox(); // read checkbox states
                 sortHolidayArray(); // sort holiday array
-                isTodayHoliday(); // check isToday Holiday
+                isTodayHoliday(); // check isTodayHoliday
+                getNextHoliday(); // check next holiday
+                node.send({payload: todayHoliday}); // output todayHoliday boolean
             }
             // send todayIsHoliday every day at 00:01 o'clock
             else if (currentHour == 0 && currentMinute == 1) {
                 sortHolidayArray(); // sort holiday array
                 isTodayHoliday(); // check isTodayHoliday
+                getNextHoliday(); // check next holiday
                 node.send({payload: todayHoliday}); // output todayHoliday boolean
             }
         }, 60000); // set interval 1min
@@ -658,15 +667,24 @@ module.exports = function(RED) {
             }
         }
 
-        function nextHoliday() {
+        function getNextHoliday() {
             sortHolidayArray(); // sort holiday
             for (let i = 0; i < holiday.length; i++) {
                 var temp = holiday[i] // access date array in holiday array
                 // check date - currentDate < 0
                 if ((new Date(temp[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
-                    node.send({payload: holiday[i - 1]}); // send next holiday
+                    nextHoliday[0] = temp[0]; // set nextHoliday Name
+                    nextHoliday[1] = temp[1]; // set nextHoliday Name
+                    nextHoliday[2] = temp[2]; // set nextHoliday Date
                     break;
                 }
+            }
+        }
+
+        function getAll() {
+            sortHolidayArray(); // sort holiday
+            for (let i = 0; i < array.length; i++) {
+                node.send({payload: holiday[i]}); // output every item of holiday array
             }
         }
 
