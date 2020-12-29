@@ -4,6 +4,8 @@ module.exports = function(RED) {
         var context = this.context();
         var node = this;
 
+        getCurrentDate(); // get current Date on startup
+
         var checkNewYear = config.neujahr; // checkbox New Year
         var checkHolyThreeKings = config.heiligDreiKoenige; // checkboy Holy Three Kings
         var checkWeiberfastnacht = config.weiberfastnacht; // checkbox Weiberfastnacht
@@ -35,6 +37,31 @@ module.exports = function(RED) {
         var checkSecondDayChristmas = config.weihnachten2; // checkbox Second day of Christmas
         var checkNewYearsEve = config.silvester; // checkbox New Years Evev
 
+        var checkOwnHoliday1 = config.ownHoliday1; // checkbox Own Holiday 1
+        var dayOwnHoliday1 = config.ownHoliday1Day; // day Own Holiday 1
+        var monthOwnHoliday1 = config.ownHoliday1Month; // month Own Holiday 1
+        var nameOwnHoliday1 = config.ownHoliday1Name; // name Own Holiday 1
+
+        var checkOwnHoliday2 = config.ownHoliday2; // checkbox Own Holiday 2
+        var dayOwnHoliday2 = config.ownHoliday2Day; // day Own Holiday 2
+        var monthOwnHoliday2 = config.ownHoliday2Month; // month Own Holiday 2
+        var nameOwnHoliday2 = config.ownHoliday2Name; // name Own Holiday 2
+
+        var checkOwnHoliday3 = config.ownHoliday3; // checkbox Own Holiday 3
+        var dayOwnHoliday3 = config.ownHoliday3Day; // day Own Holiday 3
+        var monthOwnHoliday3 = config.ownHoliday3Month; // month Own Holiday 3
+        var nameOwnHoliday3 = config.ownHoliday3Name; // name Own Holiday 3
+
+        var checkOwnHoliday4 = config.ownHoliday4; // checkbox Own Holiday 4
+        var dayOwnHoliday4 = config.ownHoliday4Day; // day Own Holiday 4
+        var monthOwnHoliday4 = config.ownHoliday4Month; // month Own Holiday 4
+        var nameOwnHoliday4 = config.ownHoliday4Name; // name Own Holiday 4
+
+        var checkOwnHoliday5 = config.ownHoliday5; // checkbox Own Holiday 5
+        var dayOwnHoliday5 = config.ownHoliday5Day; // day Own Holiday 5
+        var monthOwnHoliday5 = config.ownHoliday5Month; // month Own Holiday 5
+        var nameOwnHoliday5 = config.ownHoliday5Name; // name Own Holiday 5
+
         var currentDay; // day 1 - 31
         var currentMonth; // month 0 - 11 (+1)
         var currentYear; // full year
@@ -53,6 +80,7 @@ module.exports = function(RED) {
         var weiberfastnacht = []; // day of Weiberfastnacht
         weiberfastnacht[0] = "Weiberfastnacht";
         weiberfastnacht[1] = "Weiberfastnacht";
+        //weiberfastnacht[2];
         var valentinstag = []; // day of Valentinstag
         valentinstag[0] = "Valentinstag";
         valentinstag[1] = "Valentinstag";
@@ -60,36 +88,47 @@ module.exports = function(RED) {
         var rosenmontag = []; // day of Rosenmontag
         rosenmontag[0] = "Rosenmontag";
         rosenmontag[1] = "Rosenmontag";
+        //rosenmontag[2];
         var fastnachtsdienstag = []; // day of Fastnachtsdienstag
         fastnachtsdienstag[0] = "Fastnachtdienstag";
         fastnachtsdienstag[1] = "Fastnachtdienstag";
+        //fastnachtsdienstag[2];
         var aschermittwoch = []; // day of Aschermittwoch
         aschermittwoch[0] = "Aschermittwoch";
         aschermittwoch[1] = "Aschermittwoch";
+        //aschermittwoch[2];
         var gruendonnerstag = []; // day of Gründonnerstag
         gruendonnerstag[0] = "Gründonnerstag";
         gruendonnerstag[1] = "Gründonnerstag";
+        gruendonnerstag[2];
         var karfreitag = []; // day of Karfreitag
         karfreitag[0] = "Karfreitag";
         karfreitag[1] = "Karfreitag";
+        //karfreitag[2];
         var easterSunday = []; // day of Easter Sunday
         easterSunday[0] = "Easter Sunday";
         easterSunday[1] = "Ostersonntag";
+        //easterSunday[2];
         var easterMonday = []; // day of easter Sunday
         easterMonday[0] = "Easter Monday";
         easterMonday[1] = "Ostermontag";
+        //easterMonday[2];
         var christiHimmelfahrt = []; // day of Christi Himmelfahrt
         christiHimmelfahrt[0] = "Christi Himmelfahrt";
         christiHimmelfahrt[1] = "Christi Himmelfahrt";
+        //christiHimmelfahrt[2];
         var pfingstsonntag = []; // day of Pfingstsonntag
         pfingstsonntag[0] = "Pfingstsonntag";
         pfingstsonntag[1] = "Pfingstsonntag";
+        //pfingstsonntag[2];
         var pfingstmontag = []; // day of Pfingstmontag
         pfingstmontag[0] = "Pfingstmontag";
         pfingstmontag[1] = "Pfingstmontag";
+        //pfingstmontag[2];
         var fronleichnam = []; // day of Fronleichnam
         fronleichnam[0] = "Fronleichnam";
         fronleichnam[1] = "Fronleichnam";
+        //fronleichnam[2];
         var mariaHimmelfahrt = []; // day of Maria Himmelfahrt
         mariaHimmelfahrt[0] = "Maria Himmelfahrt";
         mariaHimmelfahrt[1] = "Maria Himmelfahrt";
@@ -121,15 +160,19 @@ module.exports = function(RED) {
         var advent1 = []; // day of first Advent
         advent1[0] = "1. Advent";
         advent1[1] = "1. Advent";
+        //advent1[2];
         var advent2 = []; // day of second Advent
         advent2[0] = "2. Advent";
         advent2[1] = "2. Advent";
+        //advent2[2];
         var advent3 = []; // day of third Advent
         advent3[0] = "3. Advent";
         advent3[1] = "3. Advent";
+        //advent3[2];
         var advent4 = []; // day of fourth Advent
         advent4[0] = "4. Advent";
         advent4[1] = "4. Advent";
+        //advent4[2];
         var christmasEve = []; // day of Christmas Eve
         christmasEve[0] = "Christmas Eve";
         christmasEve[1] = "Heiligabend";
@@ -147,10 +190,33 @@ module.exports = function(RED) {
         newYearsEve[1] = "Silvester";
         newYearsEve[2] = currentYear + "-12-31";
 
+        var ownHoliday1 = []; // day of Own Holiday 1
+        ownHoliday1[0] = nameOwnHoliday1;
+        ownHoliday1[1] = nameOwnHoliday1;
+        ownHoliday1[2] = currentYear + "-" + monthOwnHoliday1 + "-" + dayOwnHoliday1;
+        var ownHoliday2 = []; // day of Own Holiday 2
+        ownHoliday2[0] = nameOwnHoliday2;
+        ownHoliday2[1] = nameOwnHoliday2;
+        ownHoliday2[2] = currentYear + "-" + monthOwnHoliday2 + "-" + dayOwnHoliday2;
+        var ownHoliday3 = []; // day of Own Holiday 3
+        ownHoliday3[0] = nameOwnHoliday3;
+        ownHoliday3[1] = nameOwnHoliday3;
+        ownHoliday3[2] = currentYear + "-" + monthOwnHoliday3 + "-" + dayOwnHoliday3;
+        var ownHoliday4 = []; // day of Own Holiday 4
+        ownHoliday4[0] = nameOwnHoliday4;
+        ownHoliday4[1] = nameOwnHoliday4;
+        ownHoliday4[2] = currentYear + "-" + monthOwnHoliday4 + "-" + dayOwnHoliday4;
+        var ownHoliday5 = []; // day of Own Holiday 5
+        ownHoliday5[0] = nameOwnHoliday5;
+        ownHoliday5[1] = nameOwnHoliday5;
+        ownHoliday5[2] = currentYear + "-" + monthOwnHoliday5 + "-" + dayOwnHoliday5;
+
+        easter(); // set easter days on startup
+        advent(24); // set advent days on startup
+
         var holiday = []; // array contains all holiday
 
-        getCurrentDate(); // get current Date at startup
-        checkbox(); // read checkbox states at startup
+        checkbox(); // read checkbox states on startup
 
         var todayHoliday = false;
 
@@ -219,7 +285,7 @@ module.exports = function(RED) {
         function checkbox() {
             // check New Year is activated
             if (checkNewYear) {
-                holiday.push(newYear); // add New Year to holiday array
+                holiday.push(newYear[2]); // add New Year to holiday array
             }
             else {
                 var index = holiday.indexOf(newYear); // get index of item
@@ -509,10 +575,60 @@ module.exports = function(RED) {
             }
             // check New Years Eve is activated
             if (checkNewYearsEve) {
-                holiday.push(newYearsEve) // add New Years Eve to holiday array
+                holiday.push(newYearsEve); // add New Years Eve to holiday array
             }
             else {
                 var index = holiday.indexOf(newYearsEve); // get index of item
+                if (index >= 0) {
+                    holiday.splice(index); // remove item at index
+                }
+            }
+            //check Own Holiday 1 is activated
+            if (checkOwnHoliday1) {
+                holiday.push(ownHoliday1); // add Won Holiday 1 to holiday array
+            }
+            else {
+                var index = holiday.indexOf(ownHoliday1); // get index of item
+                if (index >= 0) {
+                    holiday.splice(index); // remove item at index
+                }
+            }
+            //check Own Holiday 2 is activated
+            if (checkOwnHoliday2) {
+                holiday.push(ownHoliday2); // add Won Holiday 2 to holiday array
+            }
+            else {
+                var index = holiday.indexOf(ownHoliday2); // get index of item
+                if (index >= 0) {
+                    holiday.splice(index); // remove item at index
+                }
+            }
+            //check Own Holiday 3 is activated
+            if (checkOwnHoliday3) {
+                holiday.push(ownHoliday3); // add Won Holiday 3 to holiday array
+            }
+            else {
+                var index = holiday.indexOf(ownHoliday3); // get index of item
+                if (index >= 0) {
+                    holiday.splice(index); // remove item at index
+                }
+            }
+            //check Own Holiday 4 is activated
+            if (checkOwnHoliday4) {
+                holiday.push(ownHoliday4); // add Won Holiday 4 to holiday array
+            }
+            else {
+                var index = holiday.indexOf(ownHoliday4); // get index of item
+                if (index >= 0) {
+                    holiday.splice(index); // remove item at index
+                }
+            }
+            //check Own Holiday 5 is activated
+            if (checkOwnHoliday5) {
+                holiday.push(ownHoliday5); // add Won Holiday 5 to holiday array
+            }
+            else {
+                var index = holiday.indexOf(ownHoliday5); // get index of item
                 if (index >= 0) {
                     holiday.splice(index); // remove item at index
                 }
@@ -527,7 +643,8 @@ module.exports = function(RED) {
             else {
                 for (let i = 0; i < holiday.length; i++) {
                     // step through holiday array and check today is holiday
-                    if (new Date(holiday[i]).valueOf() == new Date(currentYear + "-" + currentMonth + "-" + currentDay).valueOf()) {
+                    temp = holiday[i];
+                    if (new Date(temp[2]).toString() == new Date(currentYear + "-" + currentMonth + "-" + currentDay).toString()) {
                         todayHoliday = true;
                         break;
                     }
