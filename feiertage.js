@@ -25,7 +25,7 @@ module.exports = function(RED) {
         var checkAllerheiligen = config.allerheiligen; // checkbox Allerheiligen
         var checkStMartin = config.stMartin; // checkbox St. Martin
         var checkBussUndBettag = config.bussUndBettag; // checkbox Buß und Bettag
-        var checkNikolaus = config.nikolaus; // checkbox Nikolaus
+        var checkSanta = config.nikolaus; // checkbox Nikolaus
         var checkadvent1 = config.advent1; // checkbox 1. Advent
         var checkAdvent2 = config.advent2; // checkbox 2. Advent
         var checkAdvent3 = config.advent3; // checkbox 3. Advent
@@ -42,37 +42,110 @@ module.exports = function(RED) {
         var currentHour; // hours
         var currentMinute; // minutes
 
-        var newYear = currentYear + "-01-01"; // day of New Year
-        var holyThreeKings = currentYear + "-01-06"; // day of Holy Three Kings
-        var weiberfastnacht; // day of Weiberfastnacht
-        var valentinstag = currentYear + "-02-14"; // day of Valentinstag
-        var rosenmontag; // day of Rosenmontag
-        var fastnachtsdienstag; // day of Fastnachtsdienstag
-        var aschermittwoch; // day of Aschermittwoch
-        var gruendonnerstag; // day of Gründonnerstag
-        var karfreitag; // day of Karfreitag
-        var easterSunday; // day of Easter Sunday
-        var easterMonday; // day of easter Sunday
-        var christiHimmelfahrt; // day of Christi Himmelfahrt
-        var pfingstsonntag; // day of Pfingstsonntag
-        var pfingstmontag; // day of Pfingstmontag
-        var fronleichnam; // day of Fronleichnam
-        var mariaHimmelfahrt = currentYear + "-08-15" // day of Maria Himmelfahrt
-        var tagDerDeutschenEinheit = currentYear + "-10-03"; // day of Tag der Deutschen Einheit
-        var halloween = currentYear + "-10-31"; // day of Halloween
-        var allerheiligen = currentYear + "-11-01"; // day of Allerheiligen
-        var stMartin = currentYear + "-11-11"; // day of St. Martin
-        var bussUndBettag = currentYear + "-11-17"; // day of Buß und Bettag
-        var nikolaus = currentYear + "-12-06"; // day of Nikolaus
-        var advent1; // day of first Advent
-        var advent2; // day of second Advent
-        var advent3; // day of third Advent
-        var advent4; // day of fourth Advent
-        var christmasEve = currentYear + "-12-24"; // day of Christmas Eve
-        var firstDayChristmas = currentYear + "-12-25"; // day of First day of Christmas
-        var secondDayChristmas = currentYear + "-12-26"; // day of Second day of Christmas
-        var newYearsEve = currentYear + "-12-31"; // day of New Years Eve
-        var test = "2020-12-29";
+        var newYear = []; // day of New Year
+        newYear[0] = "New Year";
+        newYear[1] = "Neu Jahr";
+        newYear[2] = currentYear + "-01-01"; // day of New Year
+        var holyThreeKings = []; // day of Holy Three Kings
+        holyThreeKings[0] = "Holy Three Kings";
+        holyThreeKings[1] = "Heilige drei Könige";
+        holyThreeKings[2] = currentYear + "-01-01";
+        var weiberfastnacht = []; // day of Weiberfastnacht
+        weiberfastnacht[0] = "Weiberfastnacht";
+        weiberfastnacht[1] = "Weiberfastnacht";
+        var valentinstag = []; // day of Valentinstag
+        valentinstag[0] = "Valentinstag";
+        valentinstag[1] = "Valentinstag";
+        valentinstag[2] = currentYear + "-02-14";
+        var rosenmontag = []; // day of Rosenmontag
+        rosenmontag[0] = "Rosenmontag";
+        rosenmontag[1] = "Rosenmontag";
+        var fastnachtsdienstag = []; // day of Fastnachtsdienstag
+        fastnachtsdienstag[0] = "Fastnachtdienstag";
+        fastnachtsdienstag[1] = "Fastnachtdienstag";
+        var aschermittwoch = []; // day of Aschermittwoch
+        aschermittwoch[0] = "Aschermittwoch";
+        aschermittwoch[1] = "Aschermittwoch";
+        var gruendonnerstag = []; // day of Gründonnerstag
+        gruendonnerstag[0] = "Gründonnerstag";
+        gruendonnerstag[1] = "Gründonnerstag";
+        var karfreitag = []; // day of Karfreitag
+        karfreitag[0] = "Karfreitag";
+        karfreitag[1] = "Karfreitag";
+        var easterSunday = []; // day of Easter Sunday
+        easterSunday[0] = "Easter Sunday";
+        easterSunday[1] = "Ostersonntag";
+        var easterMonday = []; // day of easter Sunday
+        easterMonday[0] = "Easter Monday";
+        easterMonday[1] = "Ostermontag";
+        var christiHimmelfahrt = []; // day of Christi Himmelfahrt
+        christiHimmelfahrt[0] = "Christi Himmelfahrt";
+        christiHimmelfahrt[1] = "Christi Himmelfahrt";
+        var pfingstsonntag = []; // day of Pfingstsonntag
+        pfingstsonntag[0] = "Pfingstsonntag";
+        pfingstsonntag[1] = "Pfingstsonntag";
+        var pfingstmontag = []; // day of Pfingstmontag
+        pfingstmontag[0] = "Pfingstmontag";
+        pfingstmontag[1] = "Pfingstmontag";
+        var fronleichnam = []; // day of Fronleichnam
+        fronleichnam[0] = "Fronleichnam";
+        fronleichnam[1] = "Fronleichnam";
+        var mariaHimmelfahrt = []; // day of Maria Himmelfahrt
+        mariaHimmelfahrt[0] = "Maria Himmelfahrt";
+        mariaHimmelfahrt[1] = "Maria Himmelfahrt";
+        mariaHimmelfahrt[2] = currentYear + "-08-15";
+        var tagDerDeutschenEinheit = []; // day of Tag der Deutschen Einheit
+        tagDerDeutschenEinheit[0] = "Tag der Deutschen Einheit";
+        tagDerDeutschenEinheit[1] = "Tag der Deutschen Einheit";
+        tagDerDeutschenEinheit[2] = currentYear + "-10-03";
+        var halloween = []; // day of Halloween
+        halloween[0] = "Halloween";
+        halloween[1] = "Halloween";
+        halloween[2] = currentYear + "-10-31";
+        var allerheiligen = []; // day of Allerheiligen
+        allerheiligen[0] = "Allerheiligen";
+        allerheiligen[1] = "Allerheiligen";
+        allerheiligen[2] = currentYear + "-11-01";
+        var stMartin = []; // day of St. Martin
+        stMartin[0] = "St. Martin";
+        stMartin[1] = "St. Martin";
+        stMartin[2] = currentYear + "-11-11";
+        var bussUndBettag = []; // day of Buß und Bettag
+        bussUndBettag[0] = "Buß und Bettag";
+        bussUndBettag[1] = "Buß und Bettag";
+        bussUndBettag[2] = currentYear + "-11-17";
+        var santa = []; // day of Nikolaus
+        santa[0] = "Santa";
+        santa[1] = "Nikolaus";
+        santa[2] = currentYear + "-12-06";
+        var advent1 = []; // day of first Advent
+        advent1[0] = "1. Advent";
+        advent1[1] = "1. Advent";
+        var advent2 = []; // day of second Advent
+        advent2[0] = "2. Advent";
+        advent2[1] = "2. Advent";
+        var advent3 = []; // day of third Advent
+        advent3[0] = "3. Advent";
+        advent3[1] = "3. Advent";
+        var advent4 = []; // day of fourth Advent
+        advent4[0] = "4. Advent";
+        advent4[1] = "4. Advent";
+        var christmasEve = []; // day of Christmas Eve
+        christmasEve[0] = "Christmas Eve";
+        christmasEve[1] = "Heiligabend";
+        christmasEve[2] = currentYear + "-12-24";
+        var firstDayChristmas = []; // day of First day of Christmas
+        firstDayChristmas[0] = "First day of Christmas";
+        firstDayChristmas[1] = "1. Weihnachtsfeiertag";
+        firstDayChristmas[2] = currentYear + "-12-25";
+        var secondDayChristmas = []; // day of Second day of Christmas
+        secondDayChristmas[0] = "Second day of Christmas";
+        secondDayChristmas[1] = "2. Weihnachtsfeiertag";
+        secondDayChristmas[2] = currentYear + "-12-26";
+        var newYearsEve = []; // day of New Years Eve
+        newYearsEve[0] = "New Years Eve";
+        newYearsEve[1] = "Silvester";
+        newYearsEve[2] = currentYear + "-12-31";
 
         var holiday = []; // array contains all holiday
 
@@ -101,7 +174,6 @@ module.exports = function(RED) {
             else if (msg.payload == "easter") {
                 // outputs easter dates
                 easter();
-                holiday.push(test);
                 node.send({payload: weiberfastnacht});
                 node.send({payload: rosenmontag});
                 node.send({payload: fastnachtsdienstag});
@@ -120,7 +192,7 @@ module.exports = function(RED) {
         var dailyInterval = setInterval(function () {
             getCurrentDate(); // refresh current Date
             // delete holiday array at New Year
-            if (currentDay == 29 && currentMonth == 12 && currentHour == 11 && currentMinute == 10) {
+            if (currentDay == 1 && currentMonth == 1 && currentHour == 0 && currentMinute == 1) {
                 holiday.length = 0; // delete holiday array
                 checkbox(); // read checkbox states
                 easter(); // generate easter dates
@@ -128,7 +200,7 @@ module.exports = function(RED) {
                 isTodayHoliday(); // check isToday Holiday
             }
             // send todayIsHoliday every day at 00:01 o'clock
-            else if (currentHour == 11 && currentMinute == 45) {
+            else if (currentHour == 0 && currentMinute == 1) {
                 isTodayHoliday(); // check isTodayHoliday
                 node.send({payload: todayHoliday}); // output todayHoliday boolean
             }
@@ -355,12 +427,12 @@ module.exports = function(RED) {
                     holiday.splice(index); // remove item at index
                 }
             }
-            // check Nikolaus is activated
-            if (checkNikolaus) {
-                holiday.push(nikolaus); // add Nikolaus to holiday array
+            // check Santa is activated
+            if (checkSanta) {
+                holiday.push(santa); // add Santa to holiday array
             }
             else {
-                var index = holiday.indexOf(nikolaus); // get index of item
+                var index = holiday.indexOf(santa); // get index of item
                 if (index >= 0) {
                     holiday.splice(index); // remove item at index
                 }
@@ -481,41 +553,41 @@ module.exports = function(RED) {
             var easterDay = easterDate.getDate();
 
             var weiberfastnachtDate = new Date(easterDate - new Date(0, 0, 52)); // generate Weiberfastnacht Date object (easterSunday - 52)
-            weiberfastnacht = currentYear + "-" + (weiberfastnachtDate.getMonth() + 1) + "-" + weiberfastnachtDate.getDate();
+            weiberfastnacht[2] = currentYear + "-" + (weiberfastnachtDate.getMonth() + 1) + "-" + weiberfastnachtDate.getDate();
 
             var rosenmontagDate = new Date(easterDate - new Date(0, 0, 48)); // generate Rosenmontag Date object (easterSunday - 48)
-            rosenmontag = currentYear + "-" + (rosenmontagDate.getMonth() + 1) + "-" + rosenmontagDate.getDate();
+            rosenmontag[2] = currentYear + "-" + (rosenmontagDate.getMonth() + 1) + "-" + rosenmontagDate.getDate();
 
             var fastnachtsdienstagDate = new Date(easterDate - new Date(0, 0, 47)); // generate Rosenmontag Date object (easterSunday - 47)
-            fastnachtsdienstag = currentYear + "-" + (fastnachtsdienstagDate.getMonth() + 1) + "-" + fastnachtsdienstagDate.getDate();
+            fastnachtsdienstag[2] = currentYear + "-" + (fastnachtsdienstagDate.getMonth() + 1) + "-" + fastnachtsdienstagDate.getDate();
 
             var aschermittwochDate = new Date(easterDate - new Date(0, 0, 46)); // generate Aschermittwoch Date object (easterSunday - 46)
-            aschermittwoch = currentYear + "-" + (aschermittwochDate.getMonth() + 1) + "-" + aschermittwochDate.getDate();
+            aschermittwoch[2] = currentYear + "-" + (aschermittwochDate.getMonth() + 1) + "-" + aschermittwochDate.getDate();
 
             var gruendonnerstagDate = new Date(easterDate - new Date(0, 0, 3)); // generate Gründonnerstag Date object (easterSunday - 3)
-            gruendonnerstag = currentYear + "-" + (gruendonnerstagDate.getMonth() + 1) + "-" + gruendonnerstagDate.getDate();
+            gruendonnerstag[2] = currentYear + "-" + (gruendonnerstagDate.getMonth() + 1) + "-" + gruendonnerstagDate.getDate();
 
             var karfreitagDate = new Date(easterDate - new Date(0, 0, 2)); // generate Karfreitag Date object (easterSunday - 2)
-            karfreitag = currentYear + "-" + (karfreitagDate.getMonth() + 1) + "-" + karfreitagDate.getDate();
+            karfreitag[2] = currentYear + "-" + (karfreitagDate.getMonth() + 1) + "-" + karfreitagDate.getDate();
             
-            easterSunday = currentYear + "-" + easterMonth + "-" + easterDay;
-            easterMonday = currentYear + "-" + easterMonth + "-" + (easterDay + 1); // easterSunnday + 1
+            easterSunday[2] = currentYear + "-" + easterMonth + "-" + easterDay;
+            easterMonday[2] = currentYear + "-" + easterMonth + "-" + (easterDay + 1); // easterSunnday + 1
 
             var christiHimmelfahrtDate = new Date(easterSunday);
             christiHimmelfahrtDate.setDate(christiHimmelfahrtDate.getDate() + 39); // generate Christi Himmelfahrt Date object (easterSunday + 39)
-            christiHimmelfahrt = currentYear + "-" + (christiHimmelfahrtDate.getMonth() + 1) + "-" + christiHimmelfahrtDate.getDate();
+            christiHimmelfahrt[2] = currentYear + "-" + (christiHimmelfahrtDate.getMonth() + 1) + "-" + christiHimmelfahrtDate.getDate();
 
             var pfingstsonntagDate = new Date(easterSunday);
             pfingstsonntagDate.setDate(pfingstsonntagDate.getDate() + 49); // generate Pfingstsonntag Date object (easterSunday + 39)
-            pfingstsonntag = currentYear + "-" + (pfingstsonntagDate.getMonth() + 1) + "-" + pfingstsonntagDate.getDate();
+            pfingstsonntag[2] = currentYear + "-" + (pfingstsonntagDate.getMonth() + 1) + "-" + pfingstsonntagDate.getDate();
 
             var pfingstmontagDate = new Date(easterSunday);
             pfingstmontagDate.setDate(pfingstmontagDate.getDate() + 50); // generate Pfingstmontag Date object (easterSunday + 50)
-            pfingstmontag = currentYear + "-" + (pfingstmontagDate.getMonth() + 1) + "-" + pfingstmontagDate.getDate();
+            pfingstmontag[2] = currentYear + "-" + (pfingstmontagDate.getMonth() + 1) + "-" + pfingstmontagDate.getDate();
 
             var fronleichnamDate = new Date(easterSunday);
             fronleichnamDate.setDate(fronleichnamDate.getDate() + 60); // generate Fronleichnam Date object (easterSunday + 60)
-            fronleichnam = currentYear + "-" + (fronleichnamDate.getMonth() + 1) + "-" + fronleichnamDate.getDate();
+            fronleichnam[2] = currentYear + "-" + (fronleichnamDate.getMonth() + 1) + "-" + fronleichnamDate.getDate();
         }
 
         function advent(day) {
@@ -526,18 +598,18 @@ module.exports = function(RED) {
 
             // check generated weekday is 0 and generated month is 12
             if (checkWeekday === 0 && checkMonth == 12) {
-                advent4 = currentYear + "-" + checkMonth + "-" + day;
+                advent4[2] = currentYear + "-" + checkMonth + "-" + day;
                 var advent3Day = day - 7; // calculate day of third advent
-                advent3 = currentYear + "-" + checkMonth + "-" + advent3Day;
+                advent3[2] = currentYear + "-" + checkMonth + "-" + advent3Day;
                 var advent2Day = day - 14; // calculate day of second advent
-                advent2 = currentYear + "-" + checkMonth + "-" + advent2Day;
+                advent2[2] = currentYear + "-" + checkMonth + "-" + advent2Day;
                 var advent1Day = day - 21; // calculate day of fist advent
                 if (advent1Day < 1) {
                     // check day of first advent is in november
                     checkMonth = "11";
                     advent1Day = 30 + advent1Day;
                 }
-                advent1 = currentYear + "-" + checkMonth + "-" + advent1Day;
+                advent1[2] = currentYear + "-" + checkMonth + "-" + advent1Day;
             }
             else {
                 advent(day - 1);
