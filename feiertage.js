@@ -1141,7 +1141,9 @@ module.exports = function(RED) {
         }
 
         function getWeiberfastnacht(year) {
-            
+            var refereceDate = new Date(getAdvent4(24, year));
+            var checkDate = new Date(refereceDate - new Date(0, 0, 52));
+            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
         }
 
         function getValentinstag(year) {
@@ -1149,47 +1151,80 @@ module.exports = function(RED) {
         }
 
         function getRosenmontag(year) {
-
+            var refereceDate = new Date(getOstersonntag(year));
+            var checkDate = new Date(refereceDate - new Date(0, 0, 48));
+            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
         }
 
         function getFastnachtsdienstag(year) {
-            
+            var refereceDate = new Date(getOstersonntag(year));
+            var checkDate = new Date(refereceDate - new Date(0, 0, 47));
+            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
         }
 
         function getAschermittwoch(year) {
-            
+            var refereceDate = new Date(getOstersonntag(year));
+            var checkDate = new Date(refereceDate - new Date(0, 0, 46));
+            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
         }
 
         function getGruendonnerstag(year) {
-            
+            var refereceDate = new Date(getOstersonntag(year));
+            var checkDate = new Date(refereceDate - new Date(0, 0, 3));
+            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
         }
 
         function getKarfreitag(year) {
-            
+            var refereceDate = new Date(getOstersonntag(year));
+            var checkDate = new Date(refereceDate - new Date(0, 0, 2));
+            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
         }
 
         function getOstersonntag(year) {
+            var a = year % 19; // currentYear mod 19
+            var b = (19 * a + 24) % 30;
+            var easterSundayDay = b + (2 * (year % 4) + 4 * (year % 7) + 6 * b + 5) % 7;
             
+            if (easterSundayDay == 35 || (easterSundayDay == 34 && b == 28 && a > 10)) {
+                easterSundayDay -= 7;
+            }
+            // generate Date and change Parameters to easter Date
+            var easterDate = new Date(year, 2, 22);
+            easterDate.setTime(easterDate.getTime() + 86400000 * easterSundayDay);
+            var easterMonth = easterDate.getMonth() + 1;
+            var easterDay = easterDate.getDate();
+            
+            return year + "-" + easterMonth + "-" + easterDay;
         }
 
         function getOstermontag(year) {
-
+            var refereceDate = new Date(easterSunday);
+            refereceDate.setDate(refereceDate.getDate() + 1);
+            return currentYear + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getChristiHimmelfahrt(year) {
-            
+            var refereceDate = new Date(easterSunday);
+            refereceDate.setDate(refereceDate.getDate() + 39);
+            return currentYear + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getPfingstsonntag(year) {
-            
+            var refereceDate = new Date(easterSunday);
+            refereceDate.setDate(refereceDate.getDate() + 49);
+            return currentYear + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getPfingstmontag(year) {
-            
+            var refereceDate = new Date(easterSunday);
+            refereceDate.setDate(refereceDate.getDate() + 50);
+            return currentYear + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getFronleichnam(year) {
-            
+            var refereceDate = new Date(easterSunday);
+            refereceDate.setDate(refereceDate.getDate() + 60);
+            return currentYear + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getMariaHimmelfahrt(year) {
