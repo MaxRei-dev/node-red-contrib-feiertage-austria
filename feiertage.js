@@ -673,9 +673,7 @@ module.exports = function(RED) {
                 var temp = holiday[i] // access date array in holiday array
                 // check date - currentDate < 0
                 if ((new Date(temp[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
-                    nextHoliday[0] = temp[0]; // set nextHoliday Name
-                    nextHoliday[1] = temp[1]; // set nextHoliday Name
-                    nextHoliday[2] = temp[2]; // set nextHoliday Date
+                    nextHoliday = holiday[i - 1]; // set nextHoliday Name
                     break;
                 }
             }
