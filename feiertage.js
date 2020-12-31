@@ -1121,14 +1121,25 @@ module.exports = function(RED) {
 
         this.on('input', function(msg) {
             if (msg.payload == "all") {
+                refreshHoliday();
                 sendAll();
             }
         });
 
+        var dailyInterval = setInterval(function () {
+            setCurrentDate();
+            if (currentDay == 1 && currentMonth == 1 && currentHour == 0 && currentMinute == 1) {
+                refreshHoliday();
+            }
+            else if (currentHour == 0 && currentMinute == 1) {
+                refreshHoliday();
+            }
+        }, 60000);
+
         function sendAll() {
-            sortHolidayArray(); // sort holiday
+            sortHolidayArray();
             for (let i = 0; i < holiday.length; i++) {
-                node.send({payload: holiday[i]}); // output every item of holiday array
+                node.send({payload: holiday[i]});
             }
         }
 
@@ -1141,9 +1152,9 @@ module.exports = function(RED) {
         }
 
         function getWeiberfastnacht(year) {
-            var refereceDate = new Date(getAdvent4(24, year));
-            var checkDate = new Date(refereceDate - new Date(0, 0, 52));
-            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
+            var refereceDate = new Date(getOstersonntag(year));
+            refereceDate.setDate(refereceDate.getDate() - 52);
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getValentinstag(year) {
@@ -1152,32 +1163,32 @@ module.exports = function(RED) {
 
         function getRosenmontag(year) {
             var refereceDate = new Date(getOstersonntag(year));
-            var checkDate = new Date(refereceDate - new Date(0, 0, 48));
-            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
+            refereceDate.setDate(refereceDate.getDate() - 48);
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getFastnachtsdienstag(year) {
             var refereceDate = new Date(getOstersonntag(year));
-            var checkDate = new Date(refereceDate - new Date(0, 0, 47));
-            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
+            refereceDate.setDate(refereceDate.getDate() - 47);
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getAschermittwoch(year) {
             var refereceDate = new Date(getOstersonntag(year));
-            var checkDate = new Date(refereceDate - new Date(0, 0, 46));
-            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
+            refereceDate.setDate(refereceDate.getDate() - 46);
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getGruendonnerstag(year) {
             var refereceDate = new Date(getOstersonntag(year));
-            var checkDate = new Date(refereceDate - new Date(0, 0, 3));
-            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
+            refereceDate.setDate(refereceDate.getDate() - 3);
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getKarfreitag(year) {
             var refereceDate = new Date(getOstersonntag(year));
-            var checkDate = new Date(refereceDate - new Date(0, 0, 2));
-            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
+            refereceDate.setDate(refereceDate.getDate() - 2);
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getOstersonntag(year) {
@@ -1198,33 +1209,33 @@ module.exports = function(RED) {
         }
 
         function getOstermontag(year) {
-            var refereceDate = new Date(easterSunday);
+            var refereceDate = new Date(getOstersonntag(year));
             refereceDate.setDate(refereceDate.getDate() + 1);
-            return currentYear + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getChristiHimmelfahrt(year) {
-            var refereceDate = new Date(easterSunday);
+            var refereceDate = new Date(getOstersonntag(year));
             refereceDate.setDate(refereceDate.getDate() + 39);
-            return currentYear + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getPfingstsonntag(year) {
-            var refereceDate = new Date(easterSunday);
+            var refereceDate = new Date(getOstersonntag(year));
             refereceDate.setDate(refereceDate.getDate() + 49);
-            return currentYear + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getPfingstmontag(year) {
-            var refereceDate = new Date(easterSunday);
+            var refereceDate = new Date(getOstersonntag(year));
             refereceDate.setDate(refereceDate.getDate() + 50);
-            return currentYear + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getFronleichnam(year) {
-            var refereceDate = new Date(easterSunday);
+            var refereceDate = new Date(getOstersonntag(year));
             refereceDate.setDate(refereceDate.getDate() + 60);
-            return currentYear + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getMariaHimmelfahrt(year) {
@@ -1331,6 +1342,114 @@ module.exports = function(RED) {
             currentDay = currentDate.getDate();
             currentHour = currentDate.getHours();
             currentMinute = currentDate.getMinutes();
+        }
+
+        function refreshHoliday() {
+            if ((new Date(newYear[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                newYear[2] = getNeujahr(currentYear + 1);
+            }
+            if ((new Date(holyThreeKings[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                holyThreeKings[2] = getHeiligeDreiKoenige(currentYear + 1);
+            }
+            if ((new Date(valentinstag[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                valentinstag[2] = getValentinstag(currentYear + 1);
+            }
+            if ((new Date(rosenmontag[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                rosenmontag[2] = getRosenmontag(currentYear + 1);
+            }
+            if ((new Date(fastnachtsdienstag[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                fastnachtsdienstag[2] = getFastnachtsdienstag(currentYear + 1);
+            }
+            if ((new Date(aschermittwoch[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                aschermittwoch[2] = getAschermittwoch(currentYear + 1);
+            }
+            if ((new Date(gruendonnerstag[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                gruendonnerstag[2] = getGruendonnerstag(currentYear + 1);
+            }
+            if ((new Date(karfreitag[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                karfreitag[2] = getKarfreitag(currentYear + 1);
+            }
+            if ((new Date(easterSunday[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                easterSunday[2] = getOstersonntag(currentYear + 1);
+            }
+            if ((new Date(easterMonday[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                easterMonday[2] = getOstermontag(currentYear + 1);
+            }
+            if ((new Date(christiHimmelfahrt[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                christiHimmelfahrt[2] = getChristiHimmelfahrt(currentYear + 1);
+            }
+            if ((new Date(pfingstsonntag[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                pfingstsonntag[2] = getPfingstsonntag(currentYear + 1);
+            }
+            if ((new Date(pfingstmontag[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                pfingstmontag[2] = getPfingstmontag(currentYear + 1);
+            }
+            if ((new Date(fronleichnam[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                fronleichnam[2] = getFronleichnam(currentYear + 1);
+            }
+            if ((new Date(mariaHimmelfahrt[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                mariaHimmelfahrt[2] = getMariaHimmelfahrt(currentYear + 1);
+            }
+            if ((new Date(tagDerDeutschenEinheit[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                tagDerDeutschenEinheit[2] = getTagDerDeutschenEinheit(currentYear + 1);
+            }
+            if ((new Date(weiberfastnacht[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                weiberfastnacht[2] = getWeiberfastnacht(currentYear + 1);
+            }
+            if ((new Date(halloween[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                halloween[2] = getHalloween(currentYear + 1);
+            }
+            if ((new Date(allerheiligen[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                allerheiligen[2] = getAllerheiligen(currentYear + 1);
+            }
+            if ((new Date(stMartin[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                stMartin[2] = getStMartin(currentYear + 1);
+            }
+            if ((new Date(bussUndBettag[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                bussUndBettag[2] = getBussUndBettag(currentYear + 1);
+            }
+            if ((new Date(advent1[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                advent1[2] = getAdvent1(currentYear + 1);
+            }
+            if ((new Date(advent2[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                advent2[2] = getAdvent2(currentYear + 1);
+            }
+            if ((new Date(advent3[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                advent3[2] = getAdvent3(currentYear + 1);
+            }
+            if ((new Date(advent4[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                advent4[2] = getAdvent4(24, currentYear + 1);
+            }
+            if ((new Date(christmasEve[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                christmasEve[2] = getHeiligabend(currentYear + 1);
+            }
+            if ((new Date(firstDayChristmas[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                firstDayChristmas[2] = getWeihnachtsfeiertag1(currentYear + 1);
+            }
+            if ((new Date(secondDayChristmas[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                secondDayChristmas[2] = getWeihnachtsfeiertag2(currentYear + 1);
+            }
+            if ((new Date(newYearsEve[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                newYearsEve[2] = getSilvester(currentYear + 1);
+            }
+            if ((new Date(ownHoliday1[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                ownHoliday1[2] = getOwnHoliday1(currentYear + 1);
+            }
+            if ((new Date(santa[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                santa[2] = getNikolaus(currentYear + 1);
+            }
+            if ((new Date(ownHoliday2[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                ownHoliday2[2] = getOwnHoliday2(currentYear + 1);
+            }
+            if ((new Date(ownHoliday3[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                ownHoliday3[2] = getOwnHoliday3(currentYear + 1);
+            }
+            if ((new Date(ownHoliday4[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                ownHoliday4[2] = getOwnHoliday4(currentYear + 1);
+            }
+            if ((new Date(ownHoliday5[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
+                ownHoliday5[2] = getOwnHoliday5(currentYear + 1);
+            }
         }
 
         function sortHolidayArray() {
