@@ -1129,6 +1129,14 @@ module.exports = function(RED) {
                     refreshHoliday();
                     isTodayHoliday();
                     break;
+                case "nextHoliday":
+                    refreshHoliday();
+                    sendNextHoliday();
+                    break;
+                case "nextThreeHolidays":
+                    refreshHoliday();
+                    sendNextThreeHolidays();
+                    break;
             }
         });
 
@@ -1143,13 +1151,6 @@ module.exports = function(RED) {
                 isTodayHoliday();
             }
         }, 60000);
-
-        function sendAll() {
-            sortHolidayArray();
-            for (let i = 0; i < holiday.length; i++) {
-                node.send({payload: holiday[i]});
-            }
-        }
 
         function getNeujahr(year) {
             return year + "-01-01";
@@ -1352,6 +1353,13 @@ module.exports = function(RED) {
             currentMinute = currentDate.getMinutes();
         }
 
+        function sendAll() {
+            sortHolidayArray();
+            for (let i = 0; i < holiday.length; i++) {
+                node.send({payload: holiday[i]});
+            }
+        }
+
         function isTodayHoliday() {
             if (holiday.length == 0) {
                 todayHoliday = false;
@@ -1370,6 +1378,18 @@ module.exports = function(RED) {
                 }
                 node.send({payload: todayHoliday});
             }
+        }
+
+        function sendNextHoliday() {
+            sortHolidayArray();
+            node.send({payload: holiday[holiday.length - 1]});
+        }
+
+        function sendNextThreeHolidays() {
+            sortHolidayArray();
+            node.send({payload: holiday[holiday.length - 1]});
+            node.send({payload: holiday[holiday.length - 2]});
+            node.send({payload: holiday[holiday.length - 3]});
         }
 
         function refreshHoliday() {
