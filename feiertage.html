@@ -645,7 +645,23 @@
     <p>The input can be used to trigger special outputs. The keywords are listed below.</p>
     <ul>
         <li><p><b>isTodayHoliday</b> outputs boolean wether today is holiday</p></li>
+        <li><p><b>nextHoliday</b> outputs next holiday</p></li>
+        <li><p><b>nextThreeHolidays</b> outputs next 3 holidays</p></li>
+        <li><p><b>all</b> outputs every holiday</p></li>
     </ul>
+
+    <h3><span style="color: #339900">Output</span></h3>
+    <p>The output can be used to listen to automatic and user triggerd events.</p>
+    <p>Every day at 00:01 o'clock the node outputs a boolean value wether today is a holiday.</p>
+    <p>Holidays are always listed into an array[3].</p>
+    <ul>
+        <li><p><b>index 0:</b> english name</p></li>
+        <li><p><b>index 1:</b> german name</p></li>
+        <li><p><b>index 2:</b> date (year-month-day)</p></li>
+    </ul>
+
+    <h3><span style="color: #339900">own Holidays</span></h3>
+    <p>You can chose up to 10 own dates. Select the day in the first dropdown menu and the month in the second. Chose a name for your holiday and type it into the input field. Don't forget to hit the checkbox to enable your own holiday.</p>
 </script>
 
 <script type="text/javascript">
@@ -689,43 +705,43 @@
             ownHoliday1: {value: false},
             ownHoliday1Day: {value: 1},
             ownHoliday1Month: {value: 1},
-            ownHoliday1Name: {value: "Holiday 1"},
+            ownHoliday1Name: {value: "own Date 1"},
             ownHoliday2: {value: false},
             ownHoliday2Day: {value: 2},
             ownHoliday2Month: {value: 2},
-            ownHoliday2Name: {value: "Holiday 2"},
+            ownHoliday2Name: {value: "own Date 2"},
             ownHoliday3: {value: false},
             ownHoliday3Day: {value: 3},
             ownHoliday3Month: {value: 3},
-            ownHoliday3Name: {value: "Holiday 3"},
+            ownHoliday3Name: {value: "own Date 3"},
             ownHoliday4: {value: false},
             ownHoliday4Day: {value: 4},
             ownHoliday4Month: {value: 4},
-            ownHoliday4Name: {value: "Holiday 4"},
+            ownHoliday4Name: {value: "own Date 4"},
             ownHoliday5: {value: false},
             ownHoliday5Day: {value: 5},
             ownHoliday5Month: {value: 5},
-            ownHoliday5Name: {value: "Holiday 5"},
+            ownHoliday5Name: {value: "own Date 5"},
             ownHoliday6: {value: false},
             ownHoliday6Day: {value: 6},
             ownHoliday6Month: {value: 6},
-            ownHoliday6Name: {value: "Holiday 6"},
+            ownHoliday6Name: {value: "own Date 6"},
             ownHoliday7: {value: false},
             ownHoliday7Day: {value: 7},
             ownHoliday7Month: {value: 7},
-            ownHoliday7Name: {value: "Holiday 7"},
+            ownHoliday7Name: {value: "own Date 7"},
             ownHoliday8: {value: false},
             ownHoliday8Day: {value: 8},
             ownHoliday8Month: {value: 8},
-            ownHoliday8Name: {value: "Holiday 8"},
+            ownHoliday8Name: {value: "own Date 8"},
             ownHoliday9: {value: false},
             ownHoliday9Day: {value: 9},
             ownHoliday9Month: {value: 9},
-            ownHoliday9Name: {value: "Holiday 9"},
+            ownHoliday9Name: {value: "own Date 9"},
             ownHoliday10: {value: false},
             ownHoliday10Day: {value: 10},
             ownHoliday10Month: {value: 10},
-            ownHoliday10Name: {value: "Holiday 10"}
+            ownHoliday10Name: {value: "own Date 10"}
 		},
         inputs: 1,
         outputs: 1,
