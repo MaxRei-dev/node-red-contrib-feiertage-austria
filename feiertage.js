@@ -1120,9 +1120,15 @@ module.exports = function(RED) {
         checkbox();
 
         this.on('input', function(msg) {
-            if (msg.payload == "all") {
-                refreshHoliday();
-                sendAll();
+            switch (msg.payload) {
+                case "all":
+                    refreshHoliday();
+                    sendAll();
+                    break;
+                case "isTodayHoliday":
+                    refreshHoliday();
+                    isTodayHoliday();
+                    break;
             }
         });
 
@@ -1130,9 +1136,11 @@ module.exports = function(RED) {
             setCurrentDate();
             if (currentDay == 1 && currentMonth == 1 && currentHour == 0 && currentMinute == 1) {
                 refreshHoliday();
+                isTodayHoliday();
             }
             else if (currentHour == 0 && currentMinute == 1) {
                 refreshHoliday();
+                isTodayHoliday();
             }
         }, 60000);
 
@@ -1342,6 +1350,26 @@ module.exports = function(RED) {
             currentDay = currentDate.getDate();
             currentHour = currentDate.getHours();
             currentMinute = currentDate.getMinutes();
+        }
+
+        function isTodayHoliday() {
+            if (holiday.length == 0) {
+                todayHoliday = false;
+            }
+            else {
+                for (let i = 0; i < holiday.length; i++) {
+                    var temp = holiday[i];
+                    var todayHoliday;
+                    if (new Date(temp[2]).toString() == new Date(currentYear + "-" + currentMonth + "-" + currentDay).toString()) {
+                        todayHoliday = true;
+                        break;
+                    }
+                    else {
+                        todayHoliday = false;
+                    }
+                }
+                node.send({payload: todayHoliday});
+            }
         }
 
         function refreshHoliday() {
@@ -1816,6 +1844,12 @@ module.exports = function(RED) {
                 }
             }
         }
+
+        this.on('close', function() {
+            if (interval) {
+                clearInterval(dailyInterval);
+            }
+        });
     }
     RED.nodes.registerType("feiertage", feiertage);
 };
