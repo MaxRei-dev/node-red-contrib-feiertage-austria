@@ -1,68 +1,68 @@
 {
-    "author": {
-      "name": "Marius Lang",
-      "email": "lang.marius@t-online.de"
-    },
-    "bundleDependencies": false,
-    "dependencies": {
-      
-    },
-    "deprecated": false,
-    "description": "Node that outputs german holidays",
-    "keywords": [
-      "node-red",
-      "holiday",
-      "holidays",
-      "feiertag",
-      "feiertage",
-      "publicholiday",
-      "public",
-      "date",
-      "month",
-      "year",
-      "date",
-      "New Year",
-      "Heilige Drei Könige",
-      "Weiberfastnacht",
-      "Valentinstag",
-      "Rosenmontag",
-      "Fastnachtsdienstag",
-      "Aschermittwoch",
-      "Gründonnerstag",
-      "Karfreitag",
-      "Ostersonntag",
-      "Ostermontag",
-      "Christi Himmelfahrt",
-      "Pfingstsonntag",
-      "Pfingstmontag",
-      "Fronleichnam",
-      "Maria Himmelfahrt",
-      "Tag der Deutschen Einheit",
-      "Halloween",
-      "Allerheiligen",
-      "St. Martin",
-      "Buß und Bettag",
-      "1. Advent",
-      "2. Advent",
-      "Nikolaus",
-      "3. Advent",
-      "4. Advent",
-      "Heiligabend",
-      "1. Weihnachtsfeiertag",
-      "2. Weihnachtsfeiertag",
-      "calculate",
-      "setup"
-    ],
-    "license": "MIT",
-    "name": "node-red-contrib-feiertage",
-    "node-red": {
-      "nodes": {
-        "feiertage": "feiertage.js"
-      }
-    },
-    "repository": {
-      "private": true
-    },
-    "version": "0.0.1"
+  "author": {
+    "name": "Marius Lang",
+    "email": "lang.marius@t-online.de"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Node that outputs german holidays",
+  "keywords": [
+    "node-red",
+    "holiday",
+    "holidays",
+    "feiertag",
+    "feiertage",
+    "publicholiday",
+    "public",
+    "date",
+    "month",
+    "year",
+    "date",
+    "New Year",
+    "Heilige Drei Könige",
+    "Weiberfastnacht",
+    "Valentinstag",
+    "Rosenmontag",
+    "Fastnachtsdienstag",
+    "Aschermittwoch",
+    "Gründonnerstag",
+    "Karfreitag",
+    "Ostersonntag",
+    "Ostermontag",
+    "Christi Himmelfahrt",
+    "Pfingstsonntag",
+    "Pfingstmontag",
+    "Fronleichnam",
+    "Maria Himmelfahrt",
+    "Tag der Deutschen Einheit",
+    "Halloween",
+    "Allerheiligen",
+    "St. Martin",
+    "Buß und Bettag",
+    "1. Advent",
+    "2. Advent",
+    "Nikolaus",
+    "3. Advent",
+    "4. Advent",
+    "Heiligabend",
+    "1. Weihnachtsfeiertag",
+    "2. Weihnachtsfeiertag",
+    "calculate",
+    "setup"
+  ],
+  "license": "MIT",
+  "name": "node-red-contrib-feiertage",
+  "node-red": {
+    "nodes": {
+      "feiertage": "feiertage.js"
+    }
+  },
+  "repository": {
+    "private": true
+  },
+  "version": "0.0.1",
+  "devDependencies": {
+    "eslint": "^7.16.0"
   }
-  
+}

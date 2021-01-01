@@ -1,3 +1,7 @@
+/* TODO: 
+    add comments
+*/
+
 module.exports = function(RED) {
     function feiertage(config) {
         RED.nodes.createNode(this,config);
@@ -282,6 +286,9 @@ module.exports = function(RED) {
 
         var dailyInterval = setInterval(function () {
             setCurrentDate();
+            node.send({payload: currentDay});
+            node.send({payload: currentMonth});
+            node.send({payload: currentYear});
             if (currentDay == 1 && currentMonth == 1 && currentHour == 0 && currentMinute == 1) {
                 refreshHoliday();
                 isTodayHoliday();
@@ -293,11 +300,11 @@ module.exports = function(RED) {
         }, 60000);
 
         function getNeujahr(year) {
-            return year + "-01-01";
+            return year + "-1-1";
         }
 
         function getHeiligeDreiKoenige(year) {
-            return year + "-01-06";
+            return year + "-1-6";
         }
 
         function getWeiberfastnacht(year) {
