@@ -3,16 +3,15 @@
 The Node Red **Feiertage** node is the ultimative node to get informations about german holidays.
 
 ## Installation
-```javascript
+```
 npm install node-red-contrib-feiertage
 ```
-
 
 ## Getting Started
 At first, it's important to check that you have picked the rigth localisation and timezone on your device. Below you can find a manual how to change those settings on to a RaspberryPi.
 
 Login into your Pi. Then open the settings with this command.
-```javascript
+```
 sudo raspi-config
 ```
 Now you should see this interface. Navigate to **5 Localisation Options** and press ENTER.
@@ -48,7 +47,7 @@ index | output
 2 | date (yyyy-mm-dd)
 
 ### Own Holidays
-You can chose up to 10 own dates. Select the date in the first dropdown-menu and the month in the second. Chose a name for your holiday and type it into the input field. Don't forget to hit the checkbox to enable your own holiday.
+You can chose up to 10 own dates. Select the **day** in the first dropdown-menu and the **month** in the second. Chose a name for your holiday and type it into the input field. Don't forget to hit the checkbox to enable your own holiday.
 
 ![own_holiday_example](https://github.com/MariusLang/node-red-contrib-feiertage/blob/master/img/own_holiday_example.PNG)
 
