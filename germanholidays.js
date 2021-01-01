@@ -412,7 +412,9 @@ module.exports = function(RED) {
         }
 
         function getBussUndBettag(year) {
-            return year + "-11-17";
+            var refereceDate = new Date(getAdvent4(24, year));
+            refereceDate.setDate(refereceDate.getDate() - 32);
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getNikolaus(year) {
@@ -421,20 +423,20 @@ module.exports = function(RED) {
 
         function getAdvent1(year) {
             var refereceDate = new Date(getAdvent4(24, year));
-            var checkDate = new Date(refereceDate - new Date(0, 0, 21));
-            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
+            refereceDate.setDate(refereceDate.getDate() - 21);
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getAdvent2(year) {
             var refereceDate = new Date(getAdvent4(24, year));
-            var checkDate = new Date(refereceDate - new Date(0, 0, 14));
-            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
+            refereceDate.setDate(refereceDate.getDate() - 14);
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getAdvent3(year) {
             var refereceDate = new Date(getAdvent4(24, year));
-            var checkDate = new Date(refereceDate - new Date(0, 0, 7));
-            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
+            refereceDate.setDate(refereceDate.getDate() - 7);
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getAdvent4(day, year) {
