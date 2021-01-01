@@ -273,9 +273,6 @@ module.exports = function(RED) {
                 case "nextThreeHolidays":
                     sendNextThreeHolidays(); // outputs next 3 holidays
                     break;
-                case "currentDate":
-                    sendCurrentDate(); // outputs current date
-                    break;
             }
         });
 
