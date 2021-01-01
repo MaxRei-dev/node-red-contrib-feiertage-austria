@@ -286,9 +286,6 @@ module.exports = function(RED) {
 
         var dailyInterval = setInterval(function () {
             setCurrentDate();
-            node.send({payload: currentDay});
-            node.send({payload: currentMonth});
-            node.send({payload: currentYear});
             if (currentDay == 1 && currentMonth == 1 && currentHour == 0 && currentMinute == 1) {
                 refreshHoliday();
                 isTodayHoliday();
