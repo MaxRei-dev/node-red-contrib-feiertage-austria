@@ -50,7 +50,7 @@ index | output
 ### Own Holidays
 You can chose up to 10 own dates. Select the date in the first dropdown-menu and the month in the second. Chose a name for your holiday and type it into the input field. Don't forget to hit the checkbox to enable your own holiday.
 
-![own_holiday_example](https://github.com/MariusLang/node-red-contrib-feiertage/blob/master/img/.PNG)
+![own_holiday_example](https://github.com/MariusLang/node-red-contrib-feiertage/blob/master/img/own_holiday_example.PNG)
 
 ## Example Flow
 You can import this example into your Node Red flow.
