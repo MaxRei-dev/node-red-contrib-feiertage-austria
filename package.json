@@ -52,10 +52,10 @@
     "setup"
   ],
   "license": "MIT",
-  "name": "node-red-contrib-feiertage",
+  "name": "node-red-contrib-germanholidays",
   "node-red": {
     "nodes": {
-      "feiertage": "feiertage.js"
+      "feiertage": "germanholidays.js"
     }
   },
   "repository": {
