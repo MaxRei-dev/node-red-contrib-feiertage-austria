@@ -1,7 +1,3 @@
-/* TODO: 
-    add comments
-*/
-
 module.exports = function(RED) {
     function feiertage(config) {
         RED.nodes.createNode(this,config);
@@ -89,13 +85,13 @@ module.exports = function(RED) {
         var monthOwnHoliday10 = config.ownHoliday10Month; // month Own Holiday 10
         var nameOwnHoliday10 = config.ownHoliday10Name; // name Own Holiday 10
 
-        setCurrentDate();
+        setCurrentDate(); // set current date on start
 
-        var currentYear;
-        var currentMonth;
-        var currentDay;
-        var currentHour;
-        var currentMinute;
+        var currentYear; // current year (yyyy)
+        var currentMonth; // current month (1-12)
+        var currentDay; // current day
+        var currentHour; // current hour
+        var currentMinute; // current minute
 
         var newYear = []; // day of New Year
         newYear[0] = "New Year";
@@ -266,33 +262,26 @@ module.exports = function(RED) {
         this.on('input', function(msg) {
             switch (msg.payload) {
                 case "all":
-                    refreshHoliday();
-                    sendAll();
+                    sendAll(); // outputs all holidays
                     break;
                 case "isTodayHoliday":
-                    refreshHoliday();
-                    isTodayHoliday();
+                    isTodayHoliday(); // outputs boolean wether today is holiday
                     break;
                 case "nextHoliday":
-                    refreshHoliday();
-                    sendNextHoliday();
+                    sendNextHoliday(); // outputs next holiday
                     break;
                 case "nextThreeHolidays":
-                    refreshHoliday();
-                    sendNextThreeHolidays();
+                    sendNextThreeHolidays(); // outputs next 3 holidays
                     break;
             }
         });
 
         var dailyInterval = setInterval(function () {
-            setCurrentDate();
-            if (currentDay == 1 && currentMonth == 1 && currentHour == 0 && currentMinute == 1) {
-                refreshHoliday();
-                isTodayHoliday();
-            }
-            else if (currentHour == 0 && currentMinute == 1) {
-                refreshHoliday();
-                isTodayHoliday();
+            setCurrentDate(); // refresh current date
+            // output boolean wether roday is holiday every day at 00:01 o'clock
+            if (currentHour == 0 && currentMinute == 1) {
+                refreshHoliday(); // refresh holiday
+                isTodayHoliday(); // outputs boolean wether today is holiday
             }
         }, 60000);
 
@@ -306,7 +295,7 @@ module.exports = function(RED) {
 
         function getWeiberfastnacht(year) {
             var refereceDate = new Date(getOstersonntag(year));
-            refereceDate.setDate(refereceDate.getDate() - 52);
+            refereceDate.setDate(refereceDate.getDate() - 52); // Weiberfastnacht = eastersunday - 52 days
             return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
@@ -316,31 +305,31 @@ module.exports = function(RED) {
 
         function getRosenmontag(year) {
             var refereceDate = new Date(getOstersonntag(year));
-            refereceDate.setDate(refereceDate.getDate() - 48);
+            refereceDate.setDate(refereceDate.getDate() - 48); // Rosenmontag = eastersunday - 48
             return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getFastnachtsdienstag(year) {
             var refereceDate = new Date(getOstersonntag(year));
-            refereceDate.setDate(refereceDate.getDate() - 47);
+            refereceDate.setDate(refereceDate.getDate() - 47); // Fastnachtsdienstag = eastersunday - 47
             return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getAschermittwoch(year) {
             var refereceDate = new Date(getOstersonntag(year));
-            refereceDate.setDate(refereceDate.getDate() - 46);
+            refereceDate.setDate(refereceDate.getDate() - 46); // Aschermittwoch = eastersunday - 46
             return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getGruendonnerstag(year) {
             var refereceDate = new Date(getOstersonntag(year));
-            refereceDate.setDate(refereceDate.getDate() - 3);
+            refereceDate.setDate(refereceDate.getDate() - 3); // Gründonnerstag = eastersunday - 3
             return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getKarfreitag(year) {
             var refereceDate = new Date(getOstersonntag(year));
-            refereceDate.setDate(refereceDate.getDate() - 2);
+            refereceDate.setDate(refereceDate.getDate() - 2); // Karfreitag = eastersunday - 2
             return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
@@ -352,7 +341,7 @@ module.exports = function(RED) {
             if (easterSundayDay == 35 || (easterSundayDay == 34 && b == 28 && a > 10)) {
                 easterSundayDay -= 7;
             }
-            // generate Date and change Parameters to easter Date
+            // generate easterDate and change Parameters to easter Date
             var easterDate = new Date(year, 2, 22);
             easterDate.setTime(easterDate.getTime() + 86400000 * easterSundayDay);
             var easterMonth = easterDate.getMonth() + 1;
@@ -363,31 +352,31 @@ module.exports = function(RED) {
 
         function getOstermontag(year) {
             var refereceDate = new Date(getOstersonntag(year));
-            refereceDate.setDate(refereceDate.getDate() + 1);
+            refereceDate.setDate(refereceDate.getDate() + 1); // eastermonday = eastersunday + 1
             return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getChristiHimmelfahrt(year) {
             var refereceDate = new Date(getOstersonntag(year));
-            refereceDate.setDate(refereceDate.getDate() + 39);
+            refereceDate.setDate(refereceDate.getDate() + 39); // Christi Himmelfahrt = eastersunday + 39
             return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getPfingstsonntag(year) {
             var refereceDate = new Date(getOstersonntag(year));
-            refereceDate.setDate(refereceDate.getDate() + 49);
+            refereceDate.setDate(refereceDate.getDate() + 49); // Pfingstsonntag = eastersunday + 49
             return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getPfingstmontag(year) {
             var refereceDate = new Date(getOstersonntag(year));
-            refereceDate.setDate(refereceDate.getDate() + 50);
+            refereceDate.setDate(refereceDate.getDate() + 50); // Pfingstmontag = eastersunday + 50
             return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getFronleichnam(year) {
             var refereceDate = new Date(getOstersonntag(year));
-            refereceDate.setDate(refereceDate.getDate() + 60);
+            refereceDate.setDate(refereceDate.getDate() + 60); // Fronleichnam = eastersunday + 60
             return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
@@ -412,7 +401,9 @@ module.exports = function(RED) {
         }
 
         function getBussUndBettag(year) {
-            return year + "-11-17";
+            var refereceDate = new Date(getAdvent4(24, year));
+            refereceDate.setDate(refereceDate.getDate() - 32); // Buß und Bettag = 4. Advent - 32
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getNikolaus(year) {
@@ -421,20 +412,20 @@ module.exports = function(RED) {
 
         function getAdvent1(year) {
             var refereceDate = new Date(getAdvent4(24, year));
-            var checkDate = new Date(refereceDate - new Date(0, 0, 21));
-            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
+            refereceDate.setDate(refereceDate.getDate() - 21); // 1. Advent = 4. Advent - 21
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getAdvent2(year) {
             var refereceDate = new Date(getAdvent4(24, year));
-            var checkDate = new Date(refereceDate - new Date(0, 0, 14));
-            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
+            refereceDate.setDate(refereceDate.getDate() - 14); // 2. Advent = 4. Advent - 14
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getAdvent3(year) {
             var refereceDate = new Date(getAdvent4(24, year));
-            var checkDate = new Date(refereceDate - new Date(0, 0, 7));
-            return year + "-" + (checkDate.getMonth() + 1) + "-" + checkDate.getDate();
+            refereceDate.setDate(refereceDate.getDate() - 7); // 3. Advent = 4. Advent - 7
+            return year + "-" + (refereceDate.getMonth() + 1) + "-" + refereceDate.getDate();
         }
 
         function getAdvent4(day, year) {
@@ -509,30 +500,35 @@ module.exports = function(RED) {
         }
 
         function setCurrentDate() {
-            var currentDate = new Date();
-            currentYear = currentDate.getFullYear();
-            currentMonth = currentDate.getMonth() + 1;
-            currentDay = currentDate.getDate();
-            currentHour = currentDate.getHours();
-            currentMinute = currentDate.getMinutes();
+            var currentDate = new Date(); // create current date
+            currentYear = currentDate.getFullYear(); // set current year
+            currentMonth = currentDate.getMonth() + 1; // set current month
+            currentDay = currentDate.getDate(); // set current day
+            currentHour = currentDate.getHours(); // set current hour
+            currentMinute = currentDate.getMinutes(); // set current minute
         }
 
         function sendAll() {
-            sortHolidayArray();
+            // outputs all holidays
+            refreshHoliday(); // refresh holiday array
+            sortHolidayArray(); // sort holiday array
             for (let i = 0; i < holiday.length; i++) {
-                node.send({payload: holiday[i]});
+                node.send({payload: holiday[i]}); // send every item of holiday array
             }
         }
 
         function isTodayHoliday() {
+            // outputs boolean wether today is holiday
+            refreshHoliday(); // refresh holiday array
             if (holiday.length == 0) {
-                todayHoliday = false;
+                todayHoliday = false; // if there aren't items in holiday array today can't be holiday
             }
             else {
                 for (let i = 0; i < holiday.length; i++) {
                     var temp = holiday[i];
                     var todayHoliday;
-                    if (new Date(temp[2]).toString() == new Date(currentYear + "-" + currentMonth + "-" + currentDay).toString()) {
+                    // check item of holiday array equals todays date
+                    if (new Date(temp[2]).valueOf() == new Date(currentYear + "-" + currentMonth + "-" + currentDay).valueOf()) {
                         todayHoliday = true;
                         break;
                     }
@@ -540,23 +536,27 @@ module.exports = function(RED) {
                         todayHoliday = false;
                     }
                 }
-                node.send({payload: todayHoliday});
+                node.send({payload: todayHoliday}); // send boolean
             }
         }
 
         function sendNextHoliday() {
-            sortHolidayArray();
-            node.send({payload: holiday[holiday.length - 1]});
+            // outputs next holiday
+            refreshHoliday(); // refresh holiday array
+            sortHolidayArray(); // sort holiday array
+            node.send({payload: holiday[holiday.length - 1]}); // send last item of holiday array
         }
 
         function sendNextThreeHolidays() {
-            sortHolidayArray();
-            node.send({payload: holiday[holiday.length - 1]});
-            node.send({payload: holiday[holiday.length - 2]});
-            node.send({payload: holiday[holiday.length - 3]});
+            refreshHoliday(); // refresh holiday array
+            sortHolidayArray(); // sort holiday array
+            node.send({payload: holiday[holiday.length - 1]}); // send last item of holiday array
+            node.send({payload: holiday[holiday.length - 2]}); // send penultimate item of holiday array
+            node.send({payload: holiday[holiday.length - 3]}); // send before penultimate item of holiday array
         }
 
         function refreshHoliday() {
+            // if holiday is already over create new date (next year)
             if ((new Date(newYear[2]) - new Date(currentYear + "-" + currentMonth + "-" + currentDay)) < 0) {
                 newYear[2] = getNeujahr(currentYear + 1);
             }
@@ -680,6 +680,8 @@ module.exports = function(RED) {
         }
 
         function sortHolidayArray() {
+            // sorts holiday array
+            // latest date at last
             holiday.sort(function(a, b) {
                 if (new Date(a[2]) > new Date(b[2])) {
                     return -1;
