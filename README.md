@@ -16,12 +16,12 @@ sudo raspi-config
 ```
 Now you should see this interface. Navigate to **5 Localisation Options** and press ENTER.
 
-![pi_settings_1](https://github.com/MariusLang/node-red-contrib-germanholidays/blob/master/img/pi_settings_1.PNG)
+![pi_settings_1](https://github.com/MariusLang/node-red-contrib-feiertage/blob/master/img/pi_settings_1.PNG)
 
 Here you can set your **Local** and **Timezone**.
 If your localisation is Germany chose **de_DE.UTF-8** as your local and **Europe** --> **Berlin** as your timezone.
 
-![pi_settings_2](https://github.com/MariusLang/node-red-contrib-germanholidays/blob/master/img/pi_settings_2.PNG)
+![pi_settings_2](https://github.com/MariusLang/node-red-contrib-feiertage/blob/master/img/pi_settings_2.PNG)
 
 ## Node Description
 
@@ -49,7 +49,7 @@ index | output
 ### Own Holidays
 You can chose up to 10 own dates. Select the **day** in the first dropdown-menu and the **month** in the second. Chose a name for your holiday and type it into the input field. Don't forget to hit the checkbox to enable your own holiday.
 
-![own_holiday_example](https://github.com/MariusLang/node-red-contrib-germanholidays/blob/master/img/own_holiday_example.PNG)
+![own_holiday_example](https://github.com/MariusLang/node-red-contrib-feiertage/blob/master/img/own_holiday_example.PNG)
 
 ## Example Flow
 You can import this example into your Node Red flow.
