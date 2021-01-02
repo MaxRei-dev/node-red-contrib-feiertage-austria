@@ -1,4 +1,4 @@
-# Node Red Feiertage
+# Node Red germanholidays
 
 The Node Red **germanholidays** node is the ultimative node to get informations about german holidays.
 

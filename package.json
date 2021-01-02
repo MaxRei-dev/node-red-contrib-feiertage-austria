@@ -44,7 +44,7 @@
     "setup"
   ],
   "license": "MIT",
-  "name": "red-contrib-germanholidays",
+  "name": "node-red-contrib-germanholidays",
   "node-red": {
     "nodes": {
       "feiertage": "germanholidays.js"
