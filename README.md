@@ -7,6 +7,7 @@ The Node Red **germanholidays** node is the ultimative node to get informations 
 npm install node-red-contrib-germanholidays
 ```
 
+
 ## Getting Started
 At first, it's important to check that you have picked the rigth localisation and timezone on your device. Below you can find a manual how to change those settings on to a RaspberryPi.
 
