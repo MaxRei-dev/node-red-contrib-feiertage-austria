@@ -1,5 +1,5 @@
 module.exports = function(RED) {
-    function germanholidays(config) {
+    function feiertage(config) {
         RED.nodes.createNode(this,config);
         var context = this.context();
         var node = this;
@@ -1102,5 +1102,5 @@ module.exports = function(RED) {
             }
         });
     }
-    RED.nodes.registerType("germanholidays", germanholidays);
+    RED.nodes.registerType("feiertage", feiertage);
 };

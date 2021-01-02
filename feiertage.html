@@ -1,4 +1,4 @@
-<script type="text/html" data-template-name="germanholidays">
+<script type="text/html" data-template-name="feiertage">
     <div class="form-row">
         <span><input style="width: 20px;" type="checkbox" id="node-input-neujahr" placeholder="Neujahr"></span>
         <label style="width: 200px;" for="node-input-neujahr"><i class="fa fa-calendar"></i> Neujahr</label>
@@ -636,7 +636,7 @@
     </div>
 </script>
 
-<script type="text/html" data-help-name="germanholidays">
+<script type="text/html" data-help-name="feiertage">
     <h3><span style="color: #339900;">Details</span></h3>
     <p>The Node Red <b>Feiertage</b> Node is the ultimative Node to get informations about german holidays.</p>
     <p>It's important to pick the right localisation and timezone settings on your device! You can find more informations <a href="https://github.com/MariusLang/node-red-contrib-feiertage">here</a></p>
@@ -665,13 +665,13 @@
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('germanholidays',{
+    RED.nodes.registerType('feiertage',{
         category: 'calendar',
         color: "#339900",
         inputLabels: "manual request",
         outputLabels: "feiertage",
         defaults: {
-            name: {value: "German Holidays", required: true},
+            name: {value: "Feiertage", required: true},
             neujahr: {value: true},
             heiligeDreiKoenige: {value: true},
             weiberfastnacht: {value: true},
@@ -747,7 +747,7 @@
         outputs: 1,
         icon: "icon.svg",
         label: function() {
-            return this.name||"germanholidays";
+            return this.name||"feiertage";
         },
     });
 </script>

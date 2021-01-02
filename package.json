@@ -44,21 +44,21 @@
     "setup"
   ],
   "license": "MIT",
-  "name": "node-red-contrib-germanholidays",
+  "name": "node-red-contrib-feiertage",
   "node-red": {
     "nodes": {
-      "feiertage": "germanholidays.js"
+      "feiertage": "feiertage.js"
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MariusLang/node-red-contrib-germanholidays.git"
+    "url": "git+https://github.com/MariusLang/node-red-contrib-feiertage.git"
   },
-  "version": "0.7.1",
+  "version": "0.7.2",
   "bugs": {
-    "url": "https://github.com/MariusLang/node-red-contrib-germanholidays/issues"
+    "url": "https://github.com/MariusLang/node-red-contrib-feiertage/issues"
   },
-  "homepage": "https://github.com/MariusLang/node-red-contrib-germanholidays#readme",
+  "homepage": "https://github.com/MariusLang/node-red-contrib-feiertage#readme",
   "main": "germanholidays.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
