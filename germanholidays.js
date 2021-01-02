@@ -528,7 +528,7 @@ module.exports = function(RED) {
                     var temp = holiday[i];
                     var todayHoliday;
                     // check item of holiday array equals todays date
-                    if (new Date(temp[2]).toString() == new Date(currentYear + "-" + currentMonth + "-" + currentDay).toString()) {
+                    if (new Date(temp[2]).valueOf() == new Date(currentYear + "-" + currentMonth + "-" + currentDay).valueOf()) {
                         todayHoliday = true;
                         break;
                     }

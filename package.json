@@ -1,23 +1,15 @@
 {
-  "author": {
-    "name": "Marius Lang",
-    "email": "lang.marius@t-online.de"
-  },
-  "bundleDependencies": false,
+  "author": "Marius Lang <lang.marius@t-online.de>",
   "dependencies": {},
   "deprecated": false,
   "description": "Node that outputs german holidays",
   "keywords": [
     "node-red",
-    "holiday",
     "holidays",
-    "feiertag",
     "feiertage",
     "publicholiday",
-    "public",
-    "date",
-    "month",
-    "year",
+    "german",
+    "germanholidays",
     "date",
     "New Year",
     "Heilige Drei Könige",
@@ -48,21 +40,27 @@
     "Heiligabend",
     "1. Weihnachtsfeiertag",
     "2. Weihnachtsfeiertag",
-    "calculate",
+    "schedule",
     "setup"
   ],
   "license": "MIT",
-  "name": "node-red-contrib-germanholidays",
+  "name": "red-contrib-germanholidays",
   "node-red": {
     "nodes": {
       "feiertage": "germanholidays.js"
     }
   },
   "repository": {
-    "private": true
+    "type": "git",
+    "url": "git+https://github.com/MariusLang/node-red-contrib-germanholidays.git"
   },
-  "version": "0.0.1",
-  "devDependencies": {
-    "eslint": "^7.16.0"
+  "version": "0.7.1",
+  "bugs": {
+    "url": "https://github.com/MariusLang/node-red-contrib-germanholidays/issues"
+  },
+  "homepage": "https://github.com/MariusLang/node-red-contrib-germanholidays#readme",
+  "main": "germanholidays.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
