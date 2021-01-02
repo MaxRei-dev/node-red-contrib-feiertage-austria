@@ -18,7 +18,6 @@ Now you should see this interface. Navigate to **5 Localisation Options** and pr
 
 ![pi_settings_1](https://github.com/MariusLang/node-red-contrib-feiertage/blob/master/img/pi_settings_1.PNG)
 
-
 Here you can set your **Local** and **Timezone**.
 If your localisation is Germany chose **de_DE.UTF-8** as your local and **Europe** --> **Berlin** as your timezone.
 
