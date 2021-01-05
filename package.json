@@ -1,8 +1,8 @@
 {
-  "author": "Marius Lang <lang.marius@t-online.de>",
+  "author": "Max Reischauer <max@gethome.at> forked from Marius Lang <lang.marius@t-online.de>",
   "dependencies": {},
   "deprecated": false,
-  "description": "NodeRED node to get german holidays and own special dates",
+  "description": "NodeRED node to get austrian holidays and own special dates",
   "keywords": [
     "node-red",
     "holidays",
@@ -44,7 +44,7 @@
     "calendar"
   ],
   "license": "MIT",
-  "name": "node-red-contrib-feiertage",
+  "name": "node-red-contrib-feiertage-austria",
   "node-red": {
     "nodes": {
       "feiertage": "feiertage.js"
@@ -52,13 +52,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MariusLang/node-red-contrib-feiertage.git"
+    "url": "git+https://github.com/MaxRei-dev/node-red-contrib-feiertage-austria.git"
   },
   "version": "0.8.2",
   "bugs": {
-    "url": "https://github.com/MariusLang/node-red-contrib-feiertage/issues"
+    "url": "https://github.com/MariusLang/node-red-contrib-feiertage-austria/issues"
   },
-  "homepage": "https://github.com/MariusLang/node-red-contrib-feiertage#readme",
+  "homepage": "https://github.com/MariusLang/node-red-contrib-feiertage-austria#readme",
   "main": "feiertage.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
